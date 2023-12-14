@@ -1,11 +1,12 @@
-"use client";
-import Link from "next/link";
+import Image from 'next/image';
+import SignIn from './signin/page';
+
+
 
 export default function Home() {
   return (
-    <>
-      Hello Word <br />
-      <Link href="/cart">go to cart</Link>
-    </>
+    <div>
+      <SignIn/>
+    </div>
   );
 }
