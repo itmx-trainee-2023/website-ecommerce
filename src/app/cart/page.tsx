@@ -5,10 +5,10 @@ import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
 import { TagIcon } from "@heroicons/react/20/solid";
 
-import img1 from "../../../public/image/ImagePlaceholder.png";
-import img2 from "../../../public/image/ImagePlaceholder2.png";
-import img3 from "../../../public/image/ImagePlaceholder3.png";
-import img4 from "../../../public/image/ticket-percent.png";
+import img1 from "../../../public/image/Product/ImagePlaceholder.png";
+import img2 from "../../../public/image/Product/ImagePlaceholder2.png";
+import img3 from "../../../public/image/Product/ImagePlaceholder3.png";
+import img4 from "../../.././public/image/Product/ticket-percent.png";
 import { CheckIcon } from "@heroicons/react/20/solid";
 
 function CART() {
@@ -49,16 +49,13 @@ function CART() {
     <div className="text-center mx-auto  items-center justify-center">
       <h1 className={styles.text}>Cart</h1>
       <div className=" h-[66px] lg:justify-center items-start gap-8 inline-flex w-full justify-start">
-        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2 border-emerald-400 flex-col justify-start items-start gap-6 lg:flex border-b-2 hidden">
+        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2  flex-col justify-start items-start gap-6 lg:flex border-b-2 hidden">
           <div className="self-stretch justify-start items-center gap-[17px] inline-flex w-full">
-            <div className="p-2 bg-emerald-400 rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
-              <div className="w-6 h-6 relative" />
-            </div>
             <div className="px-[5px] py-2  rounded-[40px] flex-col justify-start items-start gap-2.5 inline-flex">
               <div
                 className={`${
                   step === 1
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-900 rounded-full text-white font-normal border-b-2 border-black "
                     : "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 lg:flex flex"
                 }`}
               >
@@ -80,20 +77,20 @@ function CART() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2 border-emerald-400 flex-col justify-start items-start gap-6 flex border-b-2 lg:hidden">
+        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2  flex-col justify-start items-start gap-6 flex border-b-2 lg:hidden">
           <div className="self-stretch justify-start items-center gap-[17px] inline-flex w-full">
-            <div className="p-2 bg-emerald-400 rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
+            <div className="p-2  rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
               <div className="w-6 h-6 relative" />
             </div>
             <div className="px-[5px] py-2  rounded-[40px] flex-col justify-start items-start gap-2.5 inline-flex">
               <div
                 className={`${
                   step === 1
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black "
                     : step === 2
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black "
                     : step === 3
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black"
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black"
                     : ""
                 }`}
               >
@@ -126,10 +123,10 @@ function CART() {
             <div
               className={`${
                 step === 2
-                  ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-400 rounded-full text-white font-normal "
+                  ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-400 rounded-full text-white font-normal "
                   : step === 3
                   ? "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 hidden "
-                  : "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-400 rounded-full text-white font-normal"
+                  : "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-400 rounded-full text-white font-normal"
               }`}
             >
               {step === 2 ? "3" : "2"}
@@ -142,10 +139,10 @@ function CART() {
               <div
                 className={`${
                   step === 2
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-950 rounded-full text-white font-normal "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-900 rounded-full text-white font-normal "
                     : step === 3
                     ? "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 "
-                    : "lg:rounded-full lg:bg-Slate-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-500 rounded-full text-white font-normal "
+                    : "lg:rounded-full lg:bg-zinc-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-500 rounded-full text-white font-normal "
                 }`}
               >
                 {step === 2 ? (
@@ -163,7 +160,7 @@ function CART() {
                   ? "lg:mb-2  lg:w-40 mb-2 w-30  "
                   : step === 3
                   ? "lg:mb-2  lg:w-40 lg:text-success   py-1  px-3 w-40  text-success"
-                  : "mb-2 ml-1  md:w-40 text-Slate-500 lg:mb-2 lg:ml-1   lg:w-40 lg:text-Slate-500"
+                  : "mb-2 ml-1  md:w-40 text-zinc-500 lg:mb-2 lg:ml-1   lg:w-40 lg:text-zinc-500"
               }`}
             >
               Checkout details
@@ -176,8 +173,8 @@ function CART() {
               <div
                 className={`${
                   step === 3
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  py-1  px-3 bg-Slate-950 rounded-full text-white font-normal  "
-                    : "lg:rounded-full lg:bg-Slate-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-500 rounded-full text-white font-normal  "
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  py-1  px-3 bg-zinc-950 rounded-full text-white font-normal  "
+                    : "lg:rounded-full lg:bg-zinc-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-500 rounded-full text-white font-normal  "
                 }`}
               >
                 3
@@ -229,7 +226,7 @@ function CART() {
                       />
                       <div className=" flex flex-col mt-2 lg:ml-2 lg:flex lg:flex-col lg:mt-2 mr-28 ">
                         <div className="lg:text-sm text-sm ">Try Table</div>
-                        <span className="bg-black text-xs text-black lg:text-xs lg:text-black">
+                        <span className=" text-xs text-black lg:text-xs ">
                           color: Black
                         </span>
                         <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden">
@@ -238,14 +235,14 @@ function CART() {
                         <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
                           <button
                             onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
                             <MinusIcon className="h-3 w-3 text-gray-700" />
                           </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
+                          <span className=" px-1 ">{quantity}</span>
                           <button
                             onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
+                            className=" px-1  md:rounded-r md:w-1/2"
                           >
                             <PlusIcon className="h-3 w-3 text-gray-700" />
                           </button>
@@ -263,14 +260,14 @@ function CART() {
                     <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-24  hidden">
                       <button
                         onClick={decreaseQuantity}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                        className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity}</span>
+                      <span className=" px-1 py-2">{quantity}</span>
                       <button
                         onClick={increaseQuantity}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
+                        className=" px-1 py-2 md:rounded-r md:w-1/2"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -284,7 +281,7 @@ function CART() {
                   </div>
                 </div>
 
-                <div className="flex items-center border-b-2 border-Slate-200">
+                <div className="flex items-center border-b-2 border-zinc-200">
                   <div className="w-1/2 px-1 py-2">
                     <div className="flex items-center">
                       <Image
@@ -296,23 +293,21 @@ function CART() {
                       />
                       <div className="ml-2 flex flex-col mt-2 mr-28">
                         <span className="text-sm">Try Table</span>
-                        <span className="bg-black text-xs text-black">
-                          color: Red
-                        </span>
+                        <span className=" text-xs text-black">color: Red</span>
                         <button className="btn btn-sm btn-ghost lg:flex hidden">
                           X Remove
                         </button>
                         <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
                           <button
                             onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            className=" px-1  md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
                             <MinusIcon className="h-3 w-3 text-gray-700" />
                           </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
+                          <span className=" px-1 ">{quantity}</span>
                           <button
                             onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
+                            className=" px-1  md:rounded-r md:w-1/2"
                           >
                             <PlusIcon className="h-3 w-3 text-gray-700" />
                           </button>
@@ -330,14 +325,14 @@ function CART() {
                     <div className="border p-2 md:rounded-lg w-full  justify-center md:justify-end md:w-24 lg:flex hidden">
                       <button
                         onClick={decreaseQuantity1}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2"
+                        className=" px-1 py-2 md:rounded-l md:w-1/2"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity1}</span>
+                      <span className=" px-1 py-2">{quantity1}</span>
                       <button
                         onClick={increaseQuantity1}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
+                        className=" px-1 py-2 md:rounded-r md:w-1/2"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -362,23 +357,21 @@ function CART() {
                       />
                       <div className="ml-2 flex flex-col mt-2 w-full mr-28">
                         <span className="text-sm">Try Table</span>
-                        <span className="bg-black text-xs text-black">
-                          color: Gold
-                        </span>
+                        <span className=" text-xs text-black">color: Gold</span>
                         <button className="btn btn-sm btn-ghost lg:flex hidden">
                           X Remove
                         </button>
                         <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
                           <button
                             onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            className="  md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
                             <MinusIcon className="h-3 w-3 text-gray-700" />
                           </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
+                          <span className=" px-1 ">{quantity}</span>
                           <button
                             onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
+                            className=" px-1  md:rounded-r md:w-1/2"
                           >
                             <PlusIcon className="h-3 w-3 text-gray-700" />
                           </button>
@@ -396,14 +389,14 @@ function CART() {
                     <div className="border p-2 md:rounded-lg w-full lg:flex justify-center md:justify-end md:w-24 hidden">
                       <button
                         onClick={decreaseQuantity2}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2"
+                        className=" px-1 py-2 md:rounded-l md:w-1/2"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity2}</span>
+                      <span className=" px-1 py-2">{quantity2}</span>
                       <button
                         onClick={increaseQuantity2}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
+                        className=" px-1 py-2 md:rounded-r md:w-1/2"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -767,7 +760,7 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22 ">
                       <button
                         onClick={decreaseQuantity}

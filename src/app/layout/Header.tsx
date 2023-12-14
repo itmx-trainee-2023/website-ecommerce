@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import { useState } from "react";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
@@ -10,21 +10,22 @@ import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
 import search from "../../../public/image/Homepage/search-nav.png";
+import Link from "next/link";
 
 export default function Header() {
   const pathname = usePathname();
-  const isPage = pathname === '/';
-  const isSignInPage = pathname === '/signin';
-  const isSignUpPage = pathname === '/signup';
+  const isPage = pathname === "/";
+  const isSignInPage = pathname === "/signin";
+  const isSignUpPage = pathname === "/signup";
 
-  if (isSignInPage||isSignUpPage||isPage) {
+  if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [step, setStep] = useState(1);
   return (
     <>
-    <div className=" navbar bg-base-100 shadow flex">
+      <div className=" navbar bg-base-100 shadow flex">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
             <div className="drawer">
@@ -108,7 +109,7 @@ export default function Header() {
                         <div tabIndex={0} role="button">
                           <div className="indicator ">
                             <Image src={cart} alt={""}></Image>
-                            <span className="badge badge-sm indicator-item bg-black text-white">
+                            <span className="badge badge-sm indicator-item bg-Slate-900 text-white">
                               2
                             </span>
                           </div>
@@ -225,7 +226,7 @@ export default function Header() {
             >
               <div className="indicator ">
                 <Image src={cart} alt={""}></Image>
-                <span className="badge badge-sm indicator-item bg-black text-white">
+                <span className="badge badge-sm indicator-item bg-zinc-900 text-white">
                   8
                 </span>
               </div>
@@ -238,9 +239,11 @@ export default function Header() {
                 <span className="font-bold text-lg">8 Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+                  <Link href="/cart">
+                    <button className="btn btn-primary btn-block">
+                      View cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
