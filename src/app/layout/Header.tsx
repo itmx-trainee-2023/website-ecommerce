@@ -1,7 +1,8 @@
-'use client';
+"use client";
 import { useState } from "react";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
 import heart from "../../../public/image/Homepage/Heart.png";
@@ -13,18 +14,17 @@ import search from "../../../public/image/Homepage/search-nav.png";
 
 export default function Header() {
   const pathname = usePathname();
-  const isPage = pathname === '/';
-  const isSignInPage = pathname === '/signin';
-  const isSignUpPage = pathname === '/signup';
+  const isPage = pathname === "/";
+  const isSignInPage = pathname === "/signin";
+  const isSignUpPage = pathname === "/signup";
 
-  if (isSignInPage||isSignUpPage||isPage) {
+  if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [step, setStep] = useState(1);
   return (
     <>
-    <div className=" navbar bg-base-100 shadow flex">
+      <div className=" navbar bg-base-100 shadow flex">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
             <div className="drawer">
@@ -158,14 +158,14 @@ export default function Header() {
         </div>
         <div className="navbar-center hidden lg:flex  ml-32">
           <ul className="menu menu-horizontal px-1">
-            <li className={`${step === 1 ? "font-bold" : " "}`}>
-              <a onClick={() => setStep(2)}>Home</a>
+            <li >
+              <Link href={"/homepage"}>Home</Link>
             </li>
             <li>
-              <a>Shop</a>
+              <Link href={"/shop"}>Shop</Link>
             </li>
             <li>
-              <a>Product</a>
+              <Link href={"/product"}>Product</Link>
             </li>
             <li>
               <a>Contact Us</a>
@@ -217,34 +217,22 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <div className="dropdown dropdown-end ">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <div className="indicator ">
-                <Image src={cart} alt={""}></Image>
-                <span className="badge badge-sm indicator-item bg-black text-white">
-                  8
-                </span>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body flex ">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+          <Link href={"/cart"}>
+            <div className="dropdown dropdown-end ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <div className="indicator ">
+                  <Image src={cart} alt={""}></Image>
+                  <span className="badge badge-sm indicator-item bg-black text-white">
+                    8
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </>
