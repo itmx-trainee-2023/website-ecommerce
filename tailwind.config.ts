@@ -19,6 +19,10 @@ const config: Config = {
       gridTemplateRows: {
         header: "64px auto",
       },
+      sidebar: "300px auto",
+    },
+    gridTemplateRows: {
+      header: "64px auto",
     },
   },
 
