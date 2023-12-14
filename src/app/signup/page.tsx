@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import signin from "../../../public/Img/signup.png";
+import signin from "../../../public/image/signup.png";
 
 const SignUp = () => {
   return (

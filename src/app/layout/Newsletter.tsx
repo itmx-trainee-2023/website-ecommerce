@@ -2,8 +2,8 @@
 import React from "react";
 import { usePathname } from 'next/navigation'
 import Image from "next/image";
-import footer from "../../../public/Img/Homepage/Footer.png";
-import email from "../../../public/Img/Homepage/email.png";
+import footer from "../../../public/image/Homepage/Footer.png";
+import email from "../../../public/image/Homepage/email.png";
 export default function Newsletter() {
   const pathname = usePathname();
 

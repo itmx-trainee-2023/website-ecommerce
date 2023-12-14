@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
-import blogp5 from "../../../../public/Img/Homepage/blog-p-5.png";
-import blogp6 from "../../../../public/Img/Homepage/blog-p-6.png";
-import blogp7 from "../../../../public/Img/Homepage/blog-p-7.png";
+import blogp5 from "../../../../public/image/Homepage/blog-p-5.png";
+import blogp6 from "../../../../public/image/Homepage/blog-p-6.png";
+import blogp7 from "../../../../public/image/Homepage/blog-p-7.png";
 
 
 function Articles() {

@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
-import living from "../../../../public/Img/Homepage/Living Room.png";
-import bedrm from "../../../../public/Img/Homepage/Bed Room.png";
-import kitcn from "../../../../public/Img/Homepage/Kitchen.png";
+import living from "../../../../public/image/Homepage/Living Room.png";
+import bedrm from "../../../../public/image/Homepage/Bed Room.png";
+import kitcn from "../../../../public/image/Homepage/Kitchen.png";
 
 
 function Simply() {

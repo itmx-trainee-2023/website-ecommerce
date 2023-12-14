@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
-import art1 from "../../../../public/Img/Homepage/Articles1.png";
-import art2 from "../../../../public/Img/Homepage/Articles2.png";
-import art3 from "../../../../public/Img/Homepage/Articles3.png";
+import art1 from "../../../../public/image/Homepage/Articles1.png";
+import art2 from "../../../../public/image/Homepage/Articles2.png";
+import art3 from "../../../../public/image/Homepage/Articles3.png";
 
 function Articles() {
   return (

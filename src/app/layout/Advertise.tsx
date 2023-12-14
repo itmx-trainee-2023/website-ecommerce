@@ -2,8 +2,8 @@
 import React from "react";
 import { usePathname } from 'next/navigation'
 import Image from "next/image";
-import ticket from "../../../public/Img/Homepage/ticket-percent.png";
-import close from "../../../public/Img/Homepage/close.png";
+import ticket from "../../../public/image/Homepage/ticket-percent.png";
+import close from "../../../public/image/Homepage/close.png";
 
 export default function Advertise() {
   const pathname = usePathname();

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image";
-import imgbn from "../../../../public/Img/Homepage/Banner.png";
+import imgbn from "../../../../public/image/Homepage/Banner.png";
 
 
 function Banner() {

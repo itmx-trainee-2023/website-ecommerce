@@ -3,10 +3,10 @@ import React from "react";
 import { usePathname } from 'next/navigation'
 import Image from "next/image";
 import Link from "next/link";
-import ig from "../../../public/Img/Homepage/instagram.png";
-import yt from "../../../public/Img/Homepage/youtube.png";
-import fb from "../../../public/Img/Homepage/facebook.png";
-import rectangle from "../../../public/Img/Homepage/Rectangle.png";
+import ig from "../../../public/image/Homepage/instagram.png";
+import yt from "../../../public/image/Homepage/youtube.png";
+import fb from "../../../public/image/Homepage/facebook.png";
+import rectangle from "../../../public/image/Homepage/Rectangle.png";
 
 
 export default function Footer() {

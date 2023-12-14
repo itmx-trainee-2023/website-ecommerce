@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import user from "../../../public/Img/Homepage/user.png";
-import calendar from "../../../public/Img/Homepage/calendar.png";
-import blogp1 from "../../../public/Img/Homepage/blog-p-1.png";
-import blogp2 from "../../../public/Img/Homepage/blog-p-2.png";
-import blogp3 from "../../../public/Img/Homepage/blog-p-3.png";
-import blogp4 from "../../../public/Img/Homepage/blog-p-4.png";
+import user from "../../../public/image/Homepage/user.png";
+import calendar from "../../../public/image/Homepage/calendar.png";
+import blogp1 from "../../../public/image/Homepage/blog-p-1.png";
+import blogp2 from "../../../public/image/Homepage/blog-p-2.png";
+import blogp3 from "../../../public/image/Homepage/blog-p-3.png";
+import blogp4 from "../../../public/image/Homepage/blog-p-4.png";
 import Articles from "../components/blogposts/Articles";
 
 function BlogPost() {

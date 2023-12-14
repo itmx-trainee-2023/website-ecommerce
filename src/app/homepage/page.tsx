@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import delivery from "../../../public/Img/Homepage/fast delivery.png";
-import money from "../../../public/Img/Homepage/money.png";
-import lock from "../../../public/Img/Homepage/lock 01.png";
-import call from "../../../public/Img/Homepage/call.png";
-import lower from "../../../public/Img/Homepage/new lower.png";
+import delivery from "../../../public/image/Homepage/fast delivery.png";
+import money from "../../../public/image/Homepage/money.png";
+import lock from "../../../public/image/Homepage/lock 01.png";
+import call from "../../../public/image/Homepage/call.png";
+import lower from "../../../public/image/Homepage/new lower.png";
 import { useState } from "react";
 import Banner from "../components/homepages/Banner";
 import Simply from "../components/homepages/Simply";

@@ -2,14 +2,14 @@
 import { useState } from "react";
 import { usePathname } from 'next/navigation'
 import Image from "next/image";
-import close from "../../../public/Img/Homepage/close.png";
-import vecter from "../../../public/Img/Homepage/vecter.png";
-import heart from "../../../public/Img/Homepage/Heart.png";
-import cart from "../../../public/Img/Homepage/Cart.png";
-import igb from "../../../public/Img/Homepage/ig-b.png";
-import fbb from "../../../public/Img/Homepage/fb-b.png";
-import ytb from "../../../public/Img/Homepage/yt-b.png";
-import search from "../../../public/Img/Homepage/search-nav.png";
+import close from "../../../public/image/Homepage/close.png";
+import vecter from "../../../public/image/Homepage/vecter.png";
+import heart from "../../../public/image/Homepage/Heart.png";
+import cart from "../../../public/image/Homepage/Cart.png";
+import igb from "../../../public/image/Homepage/ig-b.png";
+import fbb from "../../../public/image/Homepage/fb-b.png";
+import ytb from "../../../public/image/Homepage/yt-b.png";
+import search from "../../../public/image/Homepage/search-nav.png";
 
 export default function Header() {
   const pathname = usePathname();
