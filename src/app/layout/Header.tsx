@@ -108,7 +108,7 @@ export default function Header() {
                         <div tabIndex={0} role="button">
                           <div className="indicator ">
                             <Image src={cart} alt={""}></Image>
-                            <span className="badge badge-sm indicator-item bg-Slate-900 text-white">
+                            <span className="badge badge-sm indicator-item bg-black text-white">
                               2
                             </span>
                           </div>
@@ -217,30 +217,18 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <div className="dropdown dropdown-end ">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <div className="indicator ">
-                <Image src={cart} alt={""}></Image>
-                <span className="badge badge-sm indicator-item bg-black text-white">
-                  8
-                </span>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body flex ">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+          <Link href={"/cart"}>
+            <div className="dropdown dropdown-end ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <div className="indicator ">
+                  <Image src={cart} alt={""}></Image>
+                  <span className="badge badge-sm indicator-item bg-black text-white">
+                    8
+                  </span>
                 </div>
               </div>
             </div>
