@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
@@ -21,24 +23,39 @@ export default function Header() {
   if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarVisible(true);
+  };
+  const closeSidebar = () => {
+    setSidebarVisible(false);
+  };
+
+  fetch("https://dummyjson.com/products/search?q=phone")
+    .then((res) => res.json())
+    .then(console.log);
+
   return (
     <>
       <div className=" navbar bg-base-100 shadow flex">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
-            <div className="drawer">
+            <div className={`drawer `}>
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
-                {/* Page content here */}
                 <label
                   htmlFor="my-drawer"
                   className="btn bg-white border-none drawer-button ml-8"
+                  onClick={toggleSidebar}
                 >
                   <Image src={vecter} alt={""}></Image>
                 </label>
               </div>
-              <div className="drawer-side" style={{ zIndex: 9999 }}>
+              <div
+                className={`drawer-side ${sidebarVisible ? "" : "hidden"}`}
+                style={{ zIndex: 9999 }}
+              >
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"
@@ -49,7 +66,7 @@ export default function Header() {
                   <div className="flex justify-between items-center p-2">
                     <h1 className="text-lg font-semibold">3legant.</h1>
                     <button>
-                      <Image src={close} alt={""}></Image>
+                      <Image src={close} alt={""} onClick={closeSidebar}></Image>
                     </button>
                   </div>
                   <div className="relative mt-2">
@@ -65,35 +82,21 @@ export default function Header() {
                   </div>
 
                   <li className="mt-2">
-                    <a>Home</a>
+                    <Link href={"/homepage"} onClick={closeSidebar}>
+                      Home
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
-                    <details>
-                      <summary>Shop</summary>
-                      <ul>
-                        <li>
-                          <a>Submenu 1</a>
-                        </li>
-                        <li>
-                          <a>Submenu 2</a>
-                        </li>
-                      </ul>
-                    </details>
+                    <Link href={"/shop"} onClick={closeSidebar}>
+                      Shop
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
-                    <details>
-                      <summary>Product</summary>
-                      <ul>
-                        <li>
-                          <a>Submenu 1</a>
-                        </li>
-                        <li>
-                          <a>Submenu 2</a>
-                        </li>
-                      </ul>
-                    </details>
+                    <Link href={"/product"} onClick={closeSidebar}>
+                      Product
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
@@ -158,7 +161,7 @@ export default function Header() {
         </div>
         <div className="navbar-center hidden lg:flex  ml-32">
           <ul className="menu menu-horizontal px-1">
-            <li >
+            <li>
               <Link href={"/homepage"}>Home</Link>
             </li>
             <li>

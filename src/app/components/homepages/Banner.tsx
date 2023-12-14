@@ -1,12 +1,25 @@
-import React from 'react'
+/* eslint-disable @next/next/no-img-element */
+import React from "react";
 import Image from "next/image";
 import imgbn from "../../../../public/image/Homepage/Banner.png";
+import Carousel from "./Carousel";
 
-
+const images = [
+  '/image/Homepage/Banner.png',
+  '/image/Homepage/Banner.png',
+  'http://localhost:3001/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLiving%20Room.5397b0e9.png&w=640&q=75',
+  // Add more image paths as needed
+];
 function Banner() {
   return (
     <>
-    <div className=" flex justify-center">
+    <div>
+      <h1>Your Next.js App</h1>
+      <Carousel images={images} />
+    </div>
+
+
+      {/* <div className=" flex justify-center">
         <div className="carousel w-4/5 ">
           <div id="slide1" className="carousel-item relative w-full">
             <Image className="lg:w-full" src={imgbn} alt={""} />
@@ -107,10 +120,9 @@ function Banner() {
             <span className="sr-only">Next</span>
           </span>
         </button>
-      </div>
-    
+      </div> */}
     </>
-  )
+  );
 }
 
-export default Banner
+export default Banner;
