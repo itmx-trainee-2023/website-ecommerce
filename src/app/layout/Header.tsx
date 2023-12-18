@@ -6,17 +6,22 @@ import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
 import heart from "../../../public/image/Homepage/Heart.png";
-import cart from "../../../public/image/Homepage/Cart.png";
+import cart1 from "../../../public/image/Homepage/Cart.png";
 import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
 import search from "../../../public/image/Homepage/search-nav.png";
+import { useCart } from "../context/CartContext";
 
 export default function Header() {
   const pathname = usePathname();
   const isPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
   const isSignUpPage = pathname === "/signup";
+
+  const { cart } = useCart();
+
+  const cartCount = cart.length;
 
   if (isSignInPage || isSignUpPage || isPage) {
     return null;
@@ -107,7 +112,7 @@ export default function Header() {
                       <div className="dropdown dropdown-end ">
                         <div tabIndex={0} role="button">
                           <div className="indicator ">
-                            <Image src={cart} alt={""}></Image>
+                            <Image src={cart1} alt={""}></Image>
                             <span className="badge badge-sm indicator-item bg-black text-white">
                               2
                             </span>
@@ -158,7 +163,7 @@ export default function Header() {
         </div>
         <div className="navbar-center hidden lg:flex  ml-32">
           <ul className="menu menu-horizontal px-1">
-            <li >
+            <li>
               <Link href={"/homepage"}>Home</Link>
             </li>
             <li>
@@ -225,9 +230,9 @@ export default function Header() {
                 className="btn btn-ghost btn-circle"
               >
                 <div className="indicator ">
-                  <Image src={cart} alt={""}></Image>
+                  <Image src={cart1} alt={""}></Image>
                   <span className="badge badge-sm indicator-item bg-black text-white">
-                    8
+                    {cartCount}
                   </span>
                 </div>
               </div>

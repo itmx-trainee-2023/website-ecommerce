@@ -11,47 +11,47 @@ import card9 from "../../../public/img/Card9.png";
 export const shops = [
   {
     name: "Loveseat Sofa",
-    price: "$199.00",
+    price: 199.0,
     img: card1,
   },
   {
     name: "Luxury Sofa",
-    price: "$299.00",
+    price: 299.0,
     img: card2,
   },
   {
     name: "Table lamp",
-    price: "$19.00",
+    price: 19.0,
     img: card3,
   },
   {
     name: "White Drawer unit",
-    price: "$89.99",
+    price: 89.99,
     img: card4,
   },
   {
     name: "Black Tray table",
-    price: "$19.99",
+    price: 19.99,
     img: card5,
   },
   {
     name: "Lamp",
-    price: "$39.00",
+    price: 39.0,
     img: card6,
   },
   {
     name: "Light Beige Pillow",
-    price: "$3.99",
+    price: 3.99,
     img: card7,
   },
   {
     name: "Table Lamp",
-    price: "$39.99",
+    price: 39.99,
     img: card8,
   },
   {
     name: "Bamboo Basket",
-    price: "$9.99",
+    price: 9.99,
     img: card9,
   },
 ];
