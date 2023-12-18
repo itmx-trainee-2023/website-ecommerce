@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import headerimg from "../../../public/img/Image Placeholder header.png";
 import vectorfilter from "../../../public/img/Vector.png";
@@ -991,13 +991,12 @@ const Shop = () => {
                             </div>
                           </div>
                         ))}
-                        
                       </div>
                       <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0">
-                          <button className="btn btn-outline rounded-full w-60">
-                            Show more
-                          </button>
-                        </div>
+                        <button className="btn btn-outline rounded-full w-60">
+                          Show more
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

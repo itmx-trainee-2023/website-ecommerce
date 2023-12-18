@@ -224,7 +224,7 @@ function CART() {
                         height={30}
                         className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
                       />
-                      <div className=" flex flex-col mt-2 lg:ml-2 lg:flex lg:flex-col lg:mt-2 mr-28 ">
+                      <div className=" ml-2 flex flex-col mt-2 mr-28 ">
                         <div className="lg:text-sm text-sm ">Try Table</div>
                         <span className=" text-xs text-black lg:text-xs ">
                           color: Black
@@ -232,19 +232,19 @@ function CART() {
                         <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden">
                           X Remove
                         </button>
-                        <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
+                        <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
                           <button
                             onClick={decreaseQuantity}
                             className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
+                            <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
-                          <span className=" px-1 ">{quantity}</span>
+                          <span className=" px-1">{quantity}</span>
                           <button
                             onClick={increaseQuantity}
                             className=" px-1  md:rounded-r md:w-1/2"
                           >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
+                            <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
                           </button>
                         </div>
                       </div>
@@ -257,7 +257,7 @@ function CART() {
                         X
                       </button>
                     </div>
-                    <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-24  hidden">
+                    <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
                       <button
                         onClick={decreaseQuantity}
                         className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
@@ -299,17 +299,17 @@ function CART() {
                         </button>
                         <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
                           <button
-                            onClick={decreaseQuantity}
-                            className=" px-1  md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            onClick={decreaseQuantity1}
+                            className=" px-1  md:rounded-l md:w-1/2 "
                           >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
+                            <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
-                          <span className=" px-1 ">{quantity}</span>
+                          <span className=" px-1 ">{quantity1}</span>
                           <button
-                            onClick={increaseQuantity}
+                            onClick={increaseQuantity1}
                             className=" px-1  md:rounded-r md:w-1/2"
                           >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
+                            <PlusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
                         </div>
                       </div>
@@ -322,7 +322,7 @@ function CART() {
                         X
                       </button>
                     </div>
-                    <div className="border p-2 md:rounded-lg w-full  justify-center md:justify-end md:w-24 lg:flex hidden">
+                    <div className="border p-2 md:rounded-lg w-full  justify-center md:justify-end md:w-20 lg:flex hidden">
                       <button
                         onClick={decreaseQuantity1}
                         className=" px-1 py-2 md:rounded-l md:w-1/2"
@@ -363,17 +363,17 @@ function CART() {
                         </button>
                         <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
                           <button
-                            onClick={decreaseQuantity}
-                            className="  md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            onClick={decreaseQuantity2}
+                            className="  md:rounded-l md:w-1/2 "
                           >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
+                            <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
-                          <span className=" px-1 ">{quantity}</span>
+                          <span className=" px-1 ">{quantity2}</span>
                           <button
-                            onClick={increaseQuantity}
+                            onClick={increaseQuantity2}
                             className=" px-1  md:rounded-r md:w-1/2"
                           >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
+                            <PlusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
                         </div>
                       </div>
@@ -386,7 +386,7 @@ function CART() {
                         X
                       </button>
                     </div>
-                    <div className="border p-2 md:rounded-lg w-full lg:flex justify-center md:justify-end md:w-24 hidden">
+                    <div className="border p-2 md:rounded-lg w-full lg:flex justify-center md:justify-end md:w-20 hidden">
                       <button
                         onClick={decreaseQuantity2}
                         className=" px-1 py-2 md:rounded-l md:w-1/2"
@@ -764,14 +764,14 @@ function CART() {
                     <div className="border p-2 rounded-lg h-9 w-22 ">
                       <button
                         onClick={decreaseQuantity}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity}</span>
+                      <span className=" px-1 py-1">{quantity}</span>
                       <button
                         onClick={increaseQuantity}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -794,18 +794,18 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22">
                       <button
                         onClick={decreaseQuantity1}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity1}</span>
+                      <span className=" px-1 py-1">{quantity1}</span>
                       <button
                         onClick={increaseQuantity1}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -828,18 +828,18 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22">
                       <button
                         onClick={decreaseQuantity2}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity2}</span>
+                      <span className=" px-1 py-1">{quantity2}</span>
                       <button
                         onClick={increaseQuantity2}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
