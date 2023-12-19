@@ -8,12 +8,12 @@ import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
 import heart from "../../../public/image/Homepage/Heart.png";
-import cart1 from "../../../public/image/Homepage/Cart.png";
+import cart from "../../../public/image/Homepage/Cart.png";
 import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
-import search from "../../../public/image/Homepage/search-nav.png";
-import { useCart } from "../context/CartContext";
+import Search from "../../../public/image/Homepage/search-nav.png";
+
 interface Product {
   id: number;
   title: string;
@@ -38,9 +38,34 @@ const Header : React.FC<ResultsPageProps> = () => {
   const isPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
   const isSignUpPage = pathname === "/signup";
-  const { cart } = useCart();
+  const [originalData, setOriginalData] = useState<Product[]>([]);
+  const [filteredData, setFilteredData] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [search,setSearch] =  useState<string>('');
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
-  const cartCount = cart.length;
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/search?q=phone')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Data received:', data);
+        setOriginalData(data.products);
+        setFilteredData(data.products);
+      });
+  }, []);
+
+  const handleSearch = () => {
+    const filteredResults = originalData.filter((result) =>
+      result.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+    console.log('search:',filteredResults)
+  };
+
+  const handleButtonClick = () => {
+    setShowInput(!showInput);
+  };
+
   if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
@@ -135,7 +160,7 @@ const Header : React.FC<ResultsPageProps> = () => {
                       <div className="dropdown dropdown-end ">
                         <div tabIndex={0} role="button">
                           <div className="indicator ">
-                            <Image src={cart1} alt={""}></Image>
+                            <Image src={cart} alt={""}></Image>
                             <span className="badge badge-sm indicator-item bg-black text-white">
                               2
                             </span>
@@ -283,9 +308,9 @@ const Header : React.FC<ResultsPageProps> = () => {
                 className="btn btn-ghost btn-circle"
               >
                 <div className="indicator ">
-                  <Image src={cart1} alt={""}></Image>
+                  <Image src={cart} alt={""}></Image>
                   <span className="badge badge-sm indicator-item bg-black text-white">
-                    {cartCount}
+                    8
                   </span>
                 </div>
               </div>
