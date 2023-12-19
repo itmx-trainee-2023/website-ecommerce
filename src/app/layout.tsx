@@ -6,6 +6,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Advertise from "./layout/Advertise";
 import Newsletter from "./layout/Newsletter";
+import { CartProvider } from "./context/CartContext";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,10 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+
         <Advertise/>
-        <Header results={[]}  />
-        {children}
+
         <Newsletter/>
+        <Advertise />
+        <CartProvider>
+          <Header results={[]}/>
+          {children}
+        </CartProvider>
+        <Newsletter />
+
         <Footer />
       </body>
     </html>

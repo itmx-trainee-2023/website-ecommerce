@@ -8,51 +8,50 @@ import card7 from "../../../public/img/Card7.png";
 import card8 from "../../../public/img/Card8.png";
 import card9 from "../../../public/img/Card9.png";
 
-export const shops = 
-[
+export const shops = [
   {
-    "name": "Loveseat Sofa",
-    "price": "$199.00",
-    "img" : card1
+    name: "Loveseat Sofa",
+    price: 199.0,
+    img: card1,
   },
   {
-    "name": "Luxury Sofa",
-    "price": "$299.00",
-    "img" : card2
+    name: "Luxury Sofa",
+    price: 299.0,
+    img: card2,
   },
   {
-    "name": "Table lamp",
-    "price": "$19.00",
-    "img" : card3
+    name: "Table lamp",
+    price: 19.0,
+    img: card3,
   },
   {
-    "name": "White Drawer unit",
-    "price": "$89.99",
-    "img" : card4
+    name: "White Drawer unit",
+    price: 89.99,
+    img: card4,
   },
   {
-    "name": "Black Tray table",
-    "price": "$19.99",
-    "img" : card5
+    name: "Black Tray table",
+    price: 19.99,
+    img: card5,
   },
   {
-    "name": "Lamp",
-    "price": "$39.00",
-    "img" : card6
+    name: "Lamp",
+    price: 39.0,
+    img: card6,
   },
   {
-    "name": "Light Beige Pillow",
-    "price": "$3.99",
-    "img" : card7
+    name: "Light Beige Pillow",
+    price: 3.99,
+    img: card7,
   },
   {
-    "name": "Table Lamp",
-    "price": "$39.99",
-    "img" : card8
+    name: "Table Lamp",
+    price: 39.99,
+    img: card8,
   },
   {
-    "name": "Bamboo Basket",
-    "price": "$9.99",
-    "img" : card9
+    name: "Bamboo Basket",
+    price: 9.99,
+    img: card9,
   },
-]
+];
