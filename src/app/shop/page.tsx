@@ -12,18 +12,17 @@ import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
 
-interface Product {
-  name: string;
-  price: number;
-}
-
 const Shop: React.FC = () => {
   // สถานะเริ่มต้นสำหรับสินค้าที่เพิ่มเข้า
   const { cart, addToCart } = useCart();
 
   // ฟังก์ชั่นสำหรับการเพิ่มสินค้าเข้าตะกร้า
-  const handleAddToCart = (productName: string, productPrice: number) => {
-    addToCart(productName, productPrice);
+  const handleAddToCart = (
+    productName: string,
+    productPrice: number,
+    productImage: string
+  ) => {
+    addToCart(productName, productPrice, productImage);
     // ตัวเลือก: คุณสามารถอัปเดตจำนวนรายการในส่วนหัวได้ที่นี่
   };
 
@@ -222,7 +221,11 @@ const Shop: React.FC = () => {
                                     <button
                                       className="card-btn mt-64"
                                       onClick={() =>
-                                        addToCart(data.name, data.price)
+                                        handleAddToCart(
+                                          data.name,
+                                          data.price,
+                                          data.img.src
+                                        )
                                       }
                                     >
                                       Add to Cart
