@@ -57,7 +57,7 @@ function HomePage() {
                 SALE UP TO 35% OFF
               </p>
               <h1 className="lg:mt-0 mt-3 font-semibold text-4xl">
-                HUNDREDS of
+                HUNDREDS of 1234
               </h1>
               <h1 className="mb-5 font-semibold text-4xl">New lower prices!</h1>
               <p className="lg:mr-40 lg:mt-1 lg:text-lg mr-8">

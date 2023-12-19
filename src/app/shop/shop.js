@@ -8,13 +8,12 @@ import card7 from "../../../public/img/Card7.png";
 import card8 from "../../../public/img/Card8.png";
 import card9 from "../../../public/img/Card9.png";
 
-export const shops = 
-[
+export const shops = [
   {
     "id": 1,
     "name": "Loveseat Sofa",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$199.00",
+    "price": 199.00,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -24,7 +23,7 @@ export const shops =
     "id": 2,
     "name": "Luxury Sofa",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$299.00",
+    "price": 299.00,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -34,7 +33,7 @@ export const shops =
     "id": 3,
     "name": "Table lamp",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$19.00",
+    "price": 19.00,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -44,7 +43,7 @@ export const shops =
     "id": 4,
     "name": "White Drawer unit",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$89.99",
+    "price": 89.99,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -54,7 +53,7 @@ export const shops =
     "id": 5,
     "name": "Black Tray table",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$19.99",
+    "price": 19.99,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -74,7 +73,7 @@ export const shops =
     "id": 7,
     "name": "Light Beige Pillow",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$3.99",
+    "price": 3.99,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -84,7 +83,7 @@ export const shops =
     "id": 8,
     "name": "Table Lamp",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$39.99",
+    "price": 39.99,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
@@ -94,10 +93,11 @@ export const shops =
     "id": 9,
     "name": "Bamboo Basket",
     "description" : "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
-    "price": "$9.99",
+    "price": 9.99,
     "measurements" : "17 1/2x20 5/8",
     "SKU" : "1117",
     "GATEGORY" : "Living Room, Bedroom",
     "img" : card9
+
   },
-]
+];

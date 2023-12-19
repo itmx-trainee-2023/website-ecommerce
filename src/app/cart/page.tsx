@@ -5,60 +5,70 @@ import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
 import { TagIcon } from "@heroicons/react/20/solid";
 
-import img1 from "../../../public/image/ImagePlaceholder.png";
-import img2 from "../../../public/image/ImagePlaceholder2.png";
-import img3 from "../../../public/image/ImagePlaceholder3.png";
-import img4 from "../../../public/image/ticket-percent.png";
+import img1 from "../../../public/image/Product/ImagePlaceholder.png";
+import img2 from "../../../public/image/Product/ImagePlaceholder2.png";
+import img3 from "../../../public/image/Product/ImagePlaceholder3.png";
+import img4 from "../../.././public/image/Product/ticket-percent.png";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { useCart } from "../context/CartContext";
+
+interface Product {
+  name: string;
+  price: number;
+  productimg: string;
+  quantity?: number;
+}
 
 function CART() {
   const [step, setStep] = useState(1);
   const [quantity, setQuantity] = useState(1);
-  const [quantity1, setQuantity1] = useState(1);
-  const [quantity2, setQuantity2] = useState(1);
+  const { cart, setCart } = useCart();
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+  const increaseQuantity = (product: Product) => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    updateCart(product, newQuantity);
   };
 
-  const decreaseQuantity = () => {
+  const decreaseQuantity = (product: Product) => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      updateCart(product, newQuantity);
     }
-  };
-  const increaseQuantity1 = () => {
-    setQuantity1(quantity1 + 1);
   };
 
-  const decreaseQuantity1 = () => {
-    if (quantity1 > 1) {
-      setQuantity1(quantity1 - 1);
-    }
-  };
-  const increaseQuantity2 = () => {
-    setQuantity2(quantity2 + 1);
+  const updateCart = (product: { name: string }, newQuantity: number) => {
+    const updatedCart = cart.map((item) => {
+      if (item.name === product.name) {
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+
+    setCart(updatedCart);
   };
 
-  const decreaseQuantity2 = () => {
-    if (quantity2 > 1) {
-      setQuantity2(quantity2 - 1);
-    }
+  const removeItem = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    product: { name: string }
+  ) => {
+    // ทำสิ่งที่คุณต้องการกับ event และ product
+    const updatedCart = cart.filter((item) => item.name !== product.name);
+    setCart(updatedCart);
   };
 
   return (
     <div className="text-center mx-auto  items-center justify-center">
       <h1 className={styles.text}>Cart</h1>
       <div className=" h-[66px] lg:justify-center items-start gap-8 inline-flex w-full justify-start">
-        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2 border-emerald-400 flex-col justify-start items-start gap-6 lg:flex border-b-2 hidden">
+        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2  flex-col justify-start items-start gap-6 lg:flex border-b-2 hidden">
           <div className="self-stretch justify-start items-center gap-[17px] inline-flex w-full">
-            <div className="p-2 bg-emerald-400 rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
-              <div className="w-6 h-6 relative" />
-            </div>
             <div className="px-[5px] py-2  rounded-[40px] flex-col justify-start items-start gap-2.5 inline-flex">
               <div
                 className={`${
                   step === 1
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-900 rounded-full text-white font-normal border-b-2 border-black "
                     : "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 lg:flex flex"
                 }`}
               >
@@ -80,20 +90,20 @@ function CART() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2 border-emerald-400 flex-col justify-start items-start gap-6 flex border-b-2 lg:hidden">
+        <div className="w-full lg:w-64 pb-[26px] lg:border-b-2  flex-col justify-start items-start gap-6 flex border-b-2 lg:hidden">
           <div className="self-stretch justify-start items-center gap-[17px] inline-flex w-full">
-            <div className="p-2 bg-emerald-400 rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
+            <div className="p-2  rounded-[40px] flex-col justify-center items-center gap-2.5 lg:flex hidden">
               <div className="w-6 h-6 relative" />
             </div>
             <div className="px-[5px] py-2  rounded-[40px] flex-col justify-start items-start gap-2.5 inline-flex">
               <div
                 className={`${
                   step === 1
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black "
                     : step === 2
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black "
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black "
                     : step === 3
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-Slate-950 rounded-full text-white font-normal border-b-2 border-black"
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  lg:border-b-2 lg:border-black py-1  px-3 bg-zinc-950 rounded-full text-white font-normal border-b-2 border-black"
                     : ""
                 }`}
               >
@@ -126,10 +136,10 @@ function CART() {
             <div
               className={`${
                 step === 2
-                  ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-400 rounded-full text-white font-normal "
+                  ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-400 rounded-full text-white font-normal "
                   : step === 3
                   ? "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 hidden "
-                  : "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-400 rounded-full text-white font-normal"
+                  : "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-400 rounded-full text-white font-normal"
               }`}
             >
               {step === 2 ? "3" : "2"}
@@ -142,10 +152,10 @@ function CART() {
               <div
                 className={`${
                   step === 2
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-950 rounded-full text-white font-normal "
+                    ? "lg:rounded-full lg:bg-zinc-900 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-900 rounded-full text-white font-normal "
                     : step === 3
                     ? "lg:rounded-full lg:bg-success lg:text-white lg:px-3 lg:py-3   rounded-full bg-success text-white px-1 py-1 "
-                    : "lg:rounded-full lg:bg-Slate-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-500 rounded-full text-white font-normal "
+                    : "lg:rounded-full lg:bg-zinc-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-500 rounded-full text-white font-normal "
                 }`}
               >
                 {step === 2 ? (
@@ -163,7 +173,7 @@ function CART() {
                   ? "lg:mb-2  lg:w-40 mb-2 w-30  "
                   : step === 3
                   ? "lg:mb-2  lg:w-40 lg:text-success   py-1  px-3 w-40  text-success"
-                  : "mb-2 ml-1  md:w-40 text-Slate-500 lg:mb-2 lg:ml-1   lg:w-40 lg:text-Slate-500"
+                  : "mb-2 ml-1  md:w-40 text-zinc-500 lg:mb-2 lg:ml-1   lg:w-40 lg:text-zinc-500"
               }`}
             >
               Checkout details
@@ -176,8 +186,8 @@ function CART() {
               <div
                 className={`${
                   step === 3
-                    ? "lg:rounded-full lg:bg-Slate-950 lg:text-white lg:px-4 lg:py-2  py-1  px-3 bg-Slate-950 rounded-full text-white font-normal  "
-                    : "lg:rounded-full lg:bg-Slate-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-Slate-500 rounded-full text-white font-normal  "
+                    ? "lg:rounded-full lg:bg-zinc-950 lg:text-white lg:px-4 lg:py-2  py-1  px-3 bg-zinc-950 rounded-full text-white font-normal  "
+                    : "lg:rounded-full lg:bg-zinc-500 lg:text-white lg:px-4 lg:py-2   py-1  px-3 bg-zinc-500 rounded-full text-white font-normal  "
                 }`}
               >
                 3
@@ -199,257 +209,137 @@ function CART() {
       {step === 1 && (
         <>
           <div className="lg:flex flex-col lg:flex-row flex lg:pl-32 w-full lg:pr-10">
-            <div className=" lg:mt-10 lg:mr-4 w-full mt-10 mr-4 ">
-              <div className="w-full lg:border-b-2 lg:border-Slate-950  border-b-2 border-Slate-950">
-                <div className="lg:flex  flex  justify-around ">
-                  <div className=" lg:px-4 lg:py-2 lg:text-center w-full px-4 py-2 text-left ">
-                    Product
+            {cart?.length > 0 && (
+              <div className=" lg:mt-10 lg:mr-4 w-full mt-10 mr-4 ">
+                <div className="w-full lg:border-b-2 lg:border-Slate-950  border-b-2 border-Slate-950">
+                  <div className="lg:flex  flex  justify-around ">
+                    <div className=" lg:px-4 lg:py-2 lg:text-center w-full px-4 py-2 text-left ">
+                      Product
+                    </div>
+                    <div className="w-full px-2 py-2 ml-12 text-center lg:flex hidden   lg:px-4 lg:py-2 lg:ml-4 lg:text-center ">
+                      Quantity
+                    </div>
+                    <div className="w-full px-2 py-2 text-center ml-4 lg:flex hidden  lg:px-4 lg:py-2 lg:text-center ">
+                      Price
+                    </div>
+                    <div className="w-full px-2 py-2 ml-2 text-center lg:flex hidden  lg:px-4 lg:py-2 lg:ml-4 lg:text-center">
+                      Subtotal
+                    </div>
                   </div>
-                  <div className="w-full px-2 py-2 ml-12 text-center lg:flex hidden   lg:px-4 lg:py-2 lg:ml-4 lg:text-center ">
-                    Quantity
-                  </div>
-                  <div className="w-full px-2 py-2 text-center ml-4 lg:flex hidden  lg:px-4 lg:py-2 lg:text-center ">
-                    Price
-                  </div>
-                  <div className="w-full px-2 py-2 ml-2 text-center lg:flex hidden  lg:px-4 lg:py-2 lg:ml-4 lg:text-center">
-                    Subtotal
-                  </div>
-                </div>
-                <div className="w-full border-b-2 border-Slate-300  lg:w-full lg:border-b-2 lg:border-Slate-300"></div>
+                  <div className="w-full border-b-2 border-Slate-300  lg:w-full lg:border-b-2 lg:border-Slate-300"></div>
 
-                <div className="lg:flex lg:items-center items-center flex lg:border-b-2 lg:border-Slate-200 border-b-2 border-Slate-200 w-full">
-                  <div className="w-1/2 px-1 py-2">
-                    <div className="lg:flex lg:items-center items-center flex">
-                      <Image
-                        src={img1}
-                        alt={"Not Found Image"}
-                        width={50}
-                        height={30}
-                        className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
-                      />
-                      <div className=" flex flex-col mt-2 lg:ml-2 lg:flex lg:flex-col lg:mt-2 mr-28 ">
-                        <div className="lg:text-sm text-sm ">Try Table</div>
-                        <span className="bg-black text-xs text-black lg:text-xs lg:text-black">
-                          color: Black
-                        </span>
-                        <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden">
-                          X Remove
-                        </button>
-                        <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
+                  {/*  */}
+                </div>
+                {cart.map((product) => (
+                  <div
+                    key={product.name}
+                    className="lg:flex lg:items-center items-center flex lg:border-b-2 lg:border-Slate-200 border-b-2 border-Slate-200 w-full"
+                  >
+                    <div className="w-1/2 px-1 py-2">
+                      <div className="lg:flex lg:items-center items-center flex">
+                        <Image
+                          src={product.productimg}
+                          alt={product.name}
+                          width={80}
+                          height={80}
+                          className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
+                        />
+                        <div className=" ml-2 flex flex-col mt-2 mr-28 ">
+                          <div className="lg:text-sm text-sm ">Try Table</div>
+                          <span className=" text-xs text-black lg:text-xs ">
+                            color: Black
+                          </span>
                           <button
-                            onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden"
+                            onClick={(event) => removeItem(event, product)}
                           >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
+                            X Remove
                           </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
-                          <button
-                            onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
-                          >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
-                          </button>
+                          <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
+                            <button
+                              onClick={() => decreaseQuantity(product)}
+                              className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                            >
+                              <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
+                            </button>
+                            <span className=" px-1">{product.quantity}</span>
+                            <button
+                              onClick={() => increaseQuantity(product)}
+                              className=" px-1  md:rounded-r md:w-1/2"
+                            >
+                              <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
-                    <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
-                      <span className=" text-sm text-left ml-4">1961</span>
-                      <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
-                        X
-                      </button>
-                    </div>
-                    <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-24  hidden">
-                      <button
-                        onClick={decreaseQuantity}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
-                      >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity}</span>
-                      <button
-                        onClick={increaseQuantity}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="w-full px-4 py-2 text-center lg:flex hidden lg:mr-5">
-                    1961
-                  </div>
-                  <div className="w-full px-4 py-2 text-center lg:flex hidden ">
-                    1961
-                  </div>
-                </div>
-
-                <div className="flex items-center border-b-2 border-Slate-200">
-                  <div className="w-1/2 px-1 py-2">
-                    <div className="flex items-center">
-                      <Image
-                        src={img2}
-                        alt={"Not Found Image"}
-                        width={50}
-                        height={30}
-                        className="flex-shrink-0 flex-grow-0"
-                      />
-                      <div className="ml-2 flex flex-col mt-2 mr-28">
-                        <span className="text-sm">Try Table</span>
-                        <span className="bg-black text-xs text-black">
-                          color: Red
+                    <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
+                      <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
+                        <span className=" text-sm text-left ml-4">
+                          ${product.price}
                         </span>
-                        <button className="btn btn-sm btn-ghost lg:flex hidden">
-                          X Remove
+                        <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
+                          X
                         </button>
-                        <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
-                          <button
-                            onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
-                          >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
-                          </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
-                          <button
-                            onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
-                          >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
-                          </button>
-                        </div>
+                      </div>
+                      <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
+                        <button
+                          onClick={() => decreaseQuantity(product)}
+                          className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                        >
+                          <MinusIcon className="h-3 w-3 text-gray-700" />
+                        </button>
+                        <span className=" px-1 py-2">{quantity}</span>
+                        <button
+                          onClick={() => increaseQuantity(product)}
+                          className=" px-1 py-2 md:rounded-r md:w-1/2"
+                        >
+                          <PlusIcon className="h-3 w-3 text-gray-700" />
+                        </button>
                       </div>
                     </div>
-                  </div>
-                  <div className="w-full px-1 py-1 text-center md:rounded-lg ml-auto md:ml-10">
-                    <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
-                      <span className=" text-sm text-left ml-4">1961</span>
-                      <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
-                        X
-                      </button>
+                    <div className="w-full px-4 py-2 text-center lg:flex hidden lg:mr-5">
+                      ${product.price}
                     </div>
-                    <div className="border p-2 md:rounded-lg w-full  justify-center md:justify-end md:w-24 lg:flex hidden">
-                      <button
-                        onClick={decreaseQuantity1}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2"
-                      >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity1}</span>
-                      <button
-                        onClick={increaseQuantity1}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
+                    <div className="w-full px-4 py-2 text-center lg:flex hidden ">
+                      ${product.price}
                     </div>
                   </div>
-                  <div className="w-full px-4 py-2 text-center hidden lg:flex">
-                    1961
-                  </div>
-                  <div className="w-full px-4 py-2 text-center hidden lg:flex">
-                    1961
-                  </div>
-                </div>
-                <div className="flex items-center border-b-2 border-Slate-200">
-                  <div className="w-1/2 px-1 py-2">
-                    <div className="flex items-center">
-                      <Image
-                        src={img3}
-                        alt={"Not Found Image"}
-                        width={50}
-                        height={30}
-                        className="flex-shrink-0 flex-grow-0"
-                      />
-                      <div className="ml-2 flex flex-col mt-2 w-full mr-28">
-                        <span className="text-sm">Try Table</span>
-                        <span className="bg-black text-xs text-black">
-                          color: Gold
-                        </span>
-                        <button className="btn btn-sm btn-ghost lg:flex hidden">
-                          X Remove
-                        </button>
-                        <div className="border p-2 w-22 h-8  justify-center lg:border lg:p-2 lg:rounded-lg  flex lg:justify-end lg:w-24  lg:hidden">
-                          <button
-                            onClick={decreaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-l md:w-1/2 lg:bg-gray-300 lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
-                          >
-                            <MinusIcon className="h-3 w-3 text-gray-700" />
-                          </button>
-                          <span className="bg-gray-100 px-1 ">{quantity}</span>
-                          <button
-                            onClick={increaseQuantity}
-                            className="bg-gray-300 px-1  md:rounded-r md:w-1/2"
-                          >
-                            <PlusIcon className="h-3 w-3 text-gray-700" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full px-1 py-1 text-center md:rounded-lg ml-auto md:ml-10">
-                    <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden">
-                      <span className=" text-sm text-left ml-4">1961</span>
-                      <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14 ">
-                        X
-                      </button>
-                    </div>
-                    <div className="border p-2 md:rounded-lg w-full lg:flex justify-center md:justify-end md:w-24 hidden">
-                      <button
-                        onClick={decreaseQuantity2}
-                        className="bg-gray-300 px-1 py-2 md:rounded-l md:w-1/2"
-                      >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className="bg-gray-100 px-1 py-2">{quantity2}</span>
-                      <button
-                        onClick={increaseQuantity2}
-                        className="bg-gray-300 px-1 py-2 md:rounded-r md:w-1/2"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="w-full px-4 py-2 text-center lg:flex hidden">
-                    1961
-                  </div>
-                  <div className="w-full px-4 py-2 text-center lg:flex hidden">
-                    1961
-                  </div>
-                </div>
-              </div>
-              <div className="md:w-2/3 w-full mx-auto mt-8 md:ml-2 ">
-                <div className=" mt-12 let-100 flex flex-col ">
-                  <span className="font-bold text-left w-full">
-                    Have a coupon?
-                  </span>
-                  <span className="text-left mt-3">
-                    Add your code for an instant cart discount
-                  </span>
-                  <div className="border p-1 rounded-lg flex items-center w-full md:w-96 mt-4">
-                    <span className="mb-2">
-                      <Image
-                        src={img4}
-                        alt={""}
-                        width={20}
-                        height={20}
-                        className="h-6 w-6 text-Slate-400 text-opacity-50 "
-                      />
+                ))}
+                <div className="md:w-2/3 w-full mx-auto mt-8 md:ml-2 ">
+                  <div className=" mt-12 let-100 flex flex-col ">
+                    <span className="font-bold text-left w-full">
+                      Have a coupon?
                     </span>
-                    <input
-                      type="text"
-                      placeholder="Coupon Code"
-                      className="input-ghost w-full "
-                    />
-                    <button
-                      type="submit"
-                      className="justify-right text-hover:text-purple ml-auto w-30 "
-                    >
-                      Apply
-                    </button>
+                    <span className="text-left mt-3">
+                      Add your code for an instant cart discount
+                    </span>
+                    <div className="border p-1 rounded-lg flex items-center w-full md:w-96 mt-4">
+                      <span className="mb-2">
+                        <Image
+                          src={img4}
+                          alt={""}
+                          width={20}
+                          height={20}
+                          className="h-6 w-6 text-Slate-400 text-opacity-50 "
+                        />
+                      </span>
+                      <input
+                        type="text"
+                        placeholder="Coupon Code"
+                        className="input-ghost w-full "
+                      />
+                      <button
+                        type="submit"
+                        className="justify-right text-hover:text-purple ml-auto w-30 "
+                      >
+                        Apply
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className="md:w-1/2 w-full md:ml-auto mt-11 border p-4 rounded-lg md:order-last  ">
               <div className="text-left">
                 <span className="font-bold text-lg ">Cart summary</span>
@@ -506,7 +396,8 @@ function CART() {
           </div>
         </>
       )}
-      {step === 2 && (
+
+      {/* {step === 2 && (
         <>
           <div className="flex flex-col lg:flex-row lg:w-[1120px] mx-auto py-20 justify-start items-start gap-16 w-full">
             <div className="flex-col  justify-start items-start gap-6 inline-flex w-full">
@@ -767,18 +658,18 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22 ">
                       <button
                         onClick={decreaseQuantity}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity}</span>
+                      <span className=" px-1 py-1">{quantity}</span>
                       <button
                         onClick={increaseQuantity}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -801,18 +692,18 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22">
                       <button
                         onClick={decreaseQuantity1}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity1}</span>
+                      <span className=" px-1 py-1">{quantity1}</span>
                       <button
                         onClick={increaseQuantity1}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -835,18 +726,18 @@ function CART() {
                   />
                   <div className="ml-2 flex flex-col mt-2">
                     <span>Try Table</span>
-                    <span className="bg-black">color: Black</span>
+                    <span className="">color: Black</span>
                     <div className="border p-2 rounded-lg h-9 w-22">
                       <button
                         onClick={decreaseQuantity2}
-                        className="bg-gray-300 px-1 py-1 rounded-l"
+                        className=" px-1 py-1 rounded-l"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className="bg-gray-100 px-1 py-1">{quantity2}</span>
+                      <span className=" px-1 py-1">{quantity2}</span>
                       <button
                         onClick={increaseQuantity2}
-                        className="bg-gray-300 px-1 py-1 rounded-r"
+                        className=" px-1 py-1 rounded-r"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />
                       </button>
@@ -913,7 +804,7 @@ function CART() {
             </div>
           </div>
         </>
-      )}
+      )} */}
       <div className="flex flex-col items-center justify-center min-h-screen mt-10">
         {step === 3 && (
           <>

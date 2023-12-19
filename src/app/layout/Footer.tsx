@@ -12,10 +12,11 @@ import rectangle from "../../../public/image/Homepage/Rectangle.png";
 export default function Footer() {
   const pathname = usePathname();
 
+  const isPage = pathname === '/';
   const isSignInPage = pathname === '/signin';
   const isSignUpPage = pathname === '/signup';
 
-  if (isSignInPage||isSignUpPage) {
+  if (isPage||isSignInPage||isSignUpPage) {
     return null;
   }
 
@@ -40,9 +41,9 @@ export default function Footer() {
             Gift & Decoration Store
           </p>
           <div className="flex flex-col md:flex-row gap-8 md:gap-8 lg:gap-8 md:ml-auto">
-            <a className="link link-hover text-white">Home</a>
-            <a className="link link-hover text-white">Shop</a>
-            <a className="link link-hover text-white">Product</a>
+          <Link className="link link-hover text-white" href={"/homepage"}>Home</Link>
+          <Link className="link link-hover text-white" href={"/shop"}>Shop</Link>
+          <Link className="link link-hover text-white" href={"/product"}>Product</Link>
             <Link href="/blogpost" className="text-white">
               Blog
             </Link>

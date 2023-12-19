@@ -1,7 +1,10 @@
-'use client';
-import { useState } from "react";
-import { usePathname } from 'next/navigation'
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-img-element */
+"use client";
+import { usePathname } from "next/navigation";
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
+import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
 import heart from "../../../public/image/Homepage/Heart.png";
@@ -9,36 +12,96 @@ import cart from "../../../public/image/Homepage/Cart.png";
 import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
-import search from "../../../public/image/Homepage/search-nav.png";
+import Search from "../../../public/image/Homepage/search-nav.png";
 
-export default function Header() {
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+interface ResultsPageProps {
+  results: Product[];
+}
+
+const Header : React.FC<ResultsPageProps> = () => {
+  const [showInput, setShowInput] = useState(false);
   const pathname = usePathname();
-  const isPage = pathname === '/';
-  const isSignInPage = pathname === '/signin';
-  const isSignUpPage = pathname === '/signup';
+  const isPage = pathname === "/";
+  const isSignInPage = pathname === "/signin";
+  const isSignUpPage = pathname === "/signup";
+  const [originalData, setOriginalData] = useState<Product[]>([]);
+  const [filteredData, setFilteredData] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [search,setSearch] =  useState<string>('');
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
-  if (isSignInPage||isSignUpPage||isPage) {
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/search?q=phone')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Data received:', data);
+        setOriginalData(data.products);
+        setFilteredData(data.products);
+      });
+  }, []);
+
+  const handleSearch = () => {
+    const filteredResults = originalData.filter((result) =>
+      result.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+    console.log('search:',filteredResults)
+  };
+
+  const handleButtonClick = () => {
+    setShowInput(!showInput);
+  };
+
+  if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [step, setStep] = useState(1);
+  
+
+  const toggleSidebar = () => {
+    setSidebarVisible(true);
+  };
+  const closeSidebar = () => {
+    setSidebarVisible(false);
+  };
+
+  fetch("https://dummyjson.com/products/search?q=phone")
+    .then((res) => res.json())
+    .then(console.log);
+
   return (
     <>
-    <div className=" navbar bg-base-100 shadow flex">
+      <div className=" navbar bg-base-100 shadow flex">
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
-            <div className="drawer">
+            <div className={`drawer `}>
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
-                {/* Page content here */}
                 <label
                   htmlFor="my-drawer"
                   className="btn bg-white border-none drawer-button ml-8"
+                  onClick={toggleSidebar}
                 >
                   <Image src={vecter} alt={""}></Image>
                 </label>
               </div>
-              <div className="drawer-side" style={{ zIndex: 9999 }}>
+              <div
+                className={`drawer-side ${sidebarVisible ? "" : "hidden"}`}
+                style={{ zIndex: 9999 }}
+              >
                 <label
                   htmlFor="my-drawer"
                   aria-label="close sidebar"
@@ -49,7 +112,11 @@ export default function Header() {
                   <div className="flex justify-between items-center p-2">
                     <h1 className="text-lg font-semibold">3legant.</h1>
                     <button>
-                      <Image src={close} alt={""}></Image>
+                      <Image
+                        src={close}
+                        alt={""}
+                        onClick={closeSidebar}
+                      ></Image>
                     </button>
                   </div>
                   <div className="relative mt-2">
@@ -60,40 +127,26 @@ export default function Header() {
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 ">
                       {/* Add your icon component or image here */}
-                      <Image src={search} alt="Search Icon" />
+                      <Image src={Search} alt="Search Icon" />
                     </div>
                   </div>
 
                   <li className="mt-2">
-                    <a>Home</a>
+                    <Link href={"/homepage"} onClick={closeSidebar}>
+                      Home
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
-                    <details>
-                      <summary>Shop</summary>
-                      <ul>
-                        <li>
-                          <a>Submenu 1</a>
-                        </li>
-                        <li>
-                          <a>Submenu 2</a>
-                        </li>
-                      </ul>
-                    </details>
+                    <Link href={"/shop"} onClick={closeSidebar}>
+                      Shop
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
-                    <details>
-                      <summary>Product</summary>
-                      <ul>
-                        <li>
-                          <a>Submenu 1</a>
-                        </li>
-                        <li>
-                          <a>Submenu 2</a>
-                        </li>
-                      </ul>
-                    </details>
+                    <Link href={"/product"} onClick={closeSidebar}>
+                      Product
+                    </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
                   <li>
@@ -156,39 +209,69 @@ export default function Header() {
             3legant.
           </a>
         </div>
-        <div className="navbar-center hidden lg:flex  ml-32">
+        <div className="navbar-center hidden lg:flex  ml-80">
           <ul className="menu menu-horizontal px-1">
-            <li className={`${step === 1 ? "font-bold" : " "}`}>
-              <a onClick={() => setStep(2)}>Home</a>
+            <li>
+              <Link href={"/homepage"}>Home</Link>
             </li>
             <li>
-              <a>Shop</a>
+              <Link href={"/shop"}>Shop</Link>
             </li>
             <li>
-              <a>Product</a>
+              <Link href={"/product"}>Product</Link>
             </li>
             <li>
               <a>Contact Us</a>
             </li>
           </ul>
         </div>
-        <div className="navbar-end mr- lg:flex  lg:mr-36">
-          <button className="btn btn-ghost btn-circle hidden lg:flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        <div className="navbar-end lg:ml-8">
+        {showInput && (
+              <input
+              className="input input-bordered w-52 mr-6"
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder=""
               />
-            </svg>
+              
+              
+            )}
+             {showInput && (
+        <Link href={{ pathname: '/search', query: { results: JSON.stringify(filteredData) } }}>
+          <button  className="float-left" onClick={handleSearch}>
+            Search
           </button>
+        </Link>
+      )}
+             
+        </div>
+        
+        <div className="navbar-end mr- lg:flex  lg:mr-36">
+          <div className=" float-left">
+           
+            <button
+              className="btn btn-ghost btn-circle hidden lg:flex"
+              onClick={handleButtonClick}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+            
+          </div>
+          
           <div className="dropdown dropdown-end hidden lg:flex">
             <div
               tabIndex={0}
@@ -217,36 +300,24 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <div className="dropdown dropdown-end ">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
-            >
-              <div className="indicator ">
-                <Image src={cart} alt={""}></Image>
-                <span className="badge badge-sm indicator-item bg-black text-white">
-                  8
-                </span>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-            >
-              <div className="card-body flex ">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+          <Link href={"/cart"}>
+            <div className="dropdown dropdown-end ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <div className="indicator ">
+                  <Image src={cart} alt={""}></Image>
+                  <span className="badge badge-sm indicator-item bg-black text-white">
+                    8
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </>
   );
-}
+};export default Header;

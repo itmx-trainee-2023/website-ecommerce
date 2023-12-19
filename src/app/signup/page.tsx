@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import signin from "../../../public/image/signup.png";
+import signin from "../../../public/image/Product/SignUp.png";
 
 const SignUp = () => {
   return (
@@ -96,12 +96,13 @@ const SignUp = () => {
 
                 <div>
                   <Link href={"/homepage"}>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white bg-black shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Sign Up
-                  </button></Link>
+                    <button
+                      type="submit"
+                      className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white bg-black shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Sign Up
+                    </button>
+                  </Link>
                 </div>
               </form>
             </div>

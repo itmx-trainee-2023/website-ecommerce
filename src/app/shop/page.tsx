@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+"use client";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import headerimg from "../../../public/img/Image Placeholder header.png";
 import vectorfilter from "../../../public/img/Vector.png";
@@ -10,8 +11,9 @@ import hor1x2 from "../../../public/img/hor1x2.png";
 import "./shop.css";
 import Link from "next/link";
 import { shops } from "../shop/shop";
+import { useCart } from "../context/CartContext";
 
-const Shop = () => {
+const Shop: React.FC = () => {
 
   const handleImageClick = (id: number) => {
   
@@ -21,7 +23,16 @@ const Shop = () => {
     // window.location.href = `/shop/product`;
     window.location.href = `/product/${id}`;
   };
-  
+
+  const { cart, addToCart } = useCart();
+  const handleAddToCart = (
+    productName: string,
+    productPrice: number,
+    productImage: string
+  ) => {
+    addToCart(productName, productPrice, productImage);
+    // ตัวเลือก: คุณสามารถอัปเดตจำนวนรายการในส่วนหัวได้ที่นี่
+  };
   return (
     <>
       <div>
@@ -215,8 +226,16 @@ const Shop = () => {
                                         />
                                       </svg>
                                     </button>
-
-                                    <button className="card-btn mt-64">
+                                    <button
+                                      className="card-btn mt-64"
+                                      onClick={() =>
+                                        handleAddToCart(
+                                          data.name,
+                                          data.price,
+                                          data.img.src
+                                        )
+                                      }
+                                    >
                                       Add to Cart
                                     </button>
                                   </div>
@@ -256,17 +275,16 @@ const Shop = () => {
                             <div className="font-bold mt-2">
                               {data.name}
                               <br />
-                              <span>{data.price}</span>
+                              <span>${data.price}</span>
                             </div>
                           </div>
                         ))}
-                        
                       </div>
-                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0 mb-10">
-                          <button className="btn btn-outline rounded-full w-60">
-                            Show more
-                          </button>
-                        </div>
+                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0">
+                        <button className="btn btn-outline rounded-full w-60">
+                          Show more
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -278,5 +296,4 @@ const Shop = () => {
     </>
   );
 };
-
 export default Shop;
