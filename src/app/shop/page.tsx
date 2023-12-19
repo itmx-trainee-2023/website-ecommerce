@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import headerimg from "../../../public/img/Image Placeholder header.png";
 import vectorfilter from "../../../public/img/Vector.png";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import { shops } from "../shop/shop";
 
 const Shop = () => {
+
   return (
     <>
       <div>

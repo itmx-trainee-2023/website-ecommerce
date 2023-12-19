@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
@@ -12,18 +12,64 @@ import cart from "../../../public/image/Homepage/Cart.png";
 import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
-import search from "../../../public/image/Homepage/search-nav.png";
+import Search from "../../../public/image/Homepage/search-nav.png";
 
-export default function Header() {
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+interface ResultsPageProps {
+  results: Product[];
+}
+
+const Header : React.FC<ResultsPageProps> = () => {
+  const [showInput, setShowInput] = useState(false);
   const pathname = usePathname();
   const isPage = pathname === "/";
   const isSignInPage = pathname === "/signin";
   const isSignUpPage = pathname === "/signup";
+  const [originalData, setOriginalData] = useState<Product[]>([]);
+  const [filteredData, setFilteredData] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [search,setSearch] =  useState<string>('');
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/search?q=phone')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Data received:', data);
+        setOriginalData(data.products);
+        setFilteredData(data.products);
+      });
+  }, []);
+
+  const handleSearch = () => {
+    const filteredResults = originalData.filter((result) =>
+      result.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+    console.log('search:',filteredResults)
+  };
+
+  const handleButtonClick = () => {
+    setShowInput(!showInput);
+  };
 
   if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
-  const [sidebarVisible, setSidebarVisible] = useState(true);
+  
 
   const toggleSidebar = () => {
     setSidebarVisible(true);
@@ -66,7 +112,11 @@ export default function Header() {
                   <div className="flex justify-between items-center p-2">
                     <h1 className="text-lg font-semibold">3legant.</h1>
                     <button>
-                      <Image src={close} alt={""} onClick={closeSidebar}></Image>
+                      <Image
+                        src={close}
+                        alt={""}
+                        onClick={closeSidebar}
+                      ></Image>
                     </button>
                   </div>
                   <div className="relative mt-2">
@@ -77,7 +127,7 @@ export default function Header() {
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 ">
                       {/* Add your icon component or image here */}
-                      <Image src={search} alt="Search Icon" />
+                      <Image src={Search} alt="Search Icon" />
                     </div>
                   </div>
 
@@ -159,7 +209,7 @@ export default function Header() {
             3legant.
           </a>
         </div>
-        <div className="navbar-center hidden lg:flex  ml-32">
+        <div className="navbar-center hidden lg:flex  ml-80">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link href={"/homepage"}>Home</Link>
@@ -175,23 +225,53 @@ export default function Header() {
             </li>
           </ul>
         </div>
-        <div className="navbar-end mr- lg:flex  lg:mr-36">
-          <button className="btn btn-ghost btn-circle hidden lg:flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        <div className="navbar-end lg:ml-8">
+        {showInput && (
+              <input
+              className="input input-bordered w-52 mr-6"
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder=""
               />
-            </svg>
+              
+              
+            )}
+             {showInput && (
+        <Link href={{ pathname: '/search', query: { results: JSON.stringify(filteredData) } }}>
+          <button  className="float-left" onClick={handleSearch}>
+            Search
           </button>
+        </Link>
+      )}
+             
+        </div>
+        
+        <div className="navbar-end mr- lg:flex  lg:mr-36">
+          <div className=" float-left">
+           
+            <button
+              className="btn btn-ghost btn-circle hidden lg:flex"
+              onClick={handleButtonClick}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+            
+          </div>
+          
           <div className="dropdown dropdown-end hidden lg:flex">
             <div
               tabIndex={0}
@@ -240,4 +320,4 @@ export default function Header() {
       </div>
     </>
   );
-}
+};export default Header;
