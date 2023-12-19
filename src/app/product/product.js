@@ -8,7 +8,7 @@ import card7 from "../../../public/img/Card7.png";
 import card8 from "../../../public/img/Card8.png";
 import card9 from "../../../public/img/Card9.png";
 
-export const shops = 
+export const products = 
 [
   {
     "id": 1,
