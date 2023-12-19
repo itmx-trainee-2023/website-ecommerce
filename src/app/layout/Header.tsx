@@ -8,11 +8,12 @@ import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
 import vecter from "../../../public/image/Homepage/vecter.png";
 import heart from "../../../public/image/Homepage/Heart.png";
-import cart from "../../../public/image/Homepage/Cart.png";
+import cart1 from "../../../public/image/Homepage/Cart.png";
 import igb from "../../../public/image/Homepage/ig-b.png";
 import fbb from "../../../public/image/Homepage/fb-b.png";
 import ytb from "../../../public/image/Homepage/yt-b.png";
 import Search from "../../../public/image/Homepage/search-nav.png";
+import { useCart } from "../context/CartContext";
 
 interface Product {
   id: number;
@@ -48,7 +49,7 @@ const Header : React.FC<ResultsPageProps> = () => {
     fetch('https://dummyjson.com/products/search?q=phone')
       .then((res) => res.json())
       .then((data) => {
-        console.log('Data received:', data);
+        // console.log('Data received:', data);
         setOriginalData(data.products);
         setFilteredData(data.products);
       });
@@ -59,7 +60,7 @@ const Header : React.FC<ResultsPageProps> = () => {
       result.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredData(filteredResults);
-    console.log('search:',filteredResults)
+    // console.log('search:',filteredResults) 
   };
 
   const handleButtonClick = () => {
@@ -81,6 +82,10 @@ const Header : React.FC<ResultsPageProps> = () => {
   fetch("https://dummyjson.com/products/search?q=phone")
     .then((res) => res.json())
     .then(console.log);
+
+    const { cart } = useCart();
+
+  const cartCount = cart.length;  
 
   return (
     <>
@@ -160,7 +165,7 @@ const Header : React.FC<ResultsPageProps> = () => {
                       <div className="dropdown dropdown-end ">
                         <div tabIndex={0} role="button">
                           <div className="indicator ">
-                            <Image src={cart} alt={""}></Image>
+                            <Image src={cart1} alt={""}></Image>
                             <span className="badge badge-sm indicator-item bg-black text-white">
                               2
                             </span>
@@ -308,9 +313,9 @@ const Header : React.FC<ResultsPageProps> = () => {
                 className="btn btn-ghost btn-circle"
               >
                 <div className="indicator ">
-                  <Image src={cart} alt={""}></Image>
+                  <Image src={cart1} alt={""}></Image>
                   <span className="badge badge-sm indicator-item bg-black text-white">
-                    8
+                   {cartCount}
                   </span>
                 </div>
               </div>

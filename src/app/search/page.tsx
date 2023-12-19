@@ -28,7 +28,7 @@ const ResultsPage: React.FC<ResultsPageProps> = () => {
       fetch('https://dummyjson.com/products/search?q=phone')
         .then((res) => res.json())
         .then((data) => {
-          console.log('Data received:', data);
+          // console.log('Data received:', data);
           setOriginalData(data.products);
           setFilteredData(data.products);
         });
@@ -39,7 +39,7 @@ const ResultsPage: React.FC<ResultsPageProps> = () => {
           result.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredData(filteredResults);
-        console.log('search:', filteredResults);
+        // console.log('search:', filteredResults);
       };
     
       const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
