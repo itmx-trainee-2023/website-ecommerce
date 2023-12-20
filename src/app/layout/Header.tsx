@@ -79,10 +79,7 @@ const Header : React.FC<ResultsPageProps> = () => {
     setSidebarVisible(false);
   };
 
-  fetch("https://dummyjson.com/products/search?q=phone")
-    .then((res) => res.json())
-    .then(console.log);
-
+  
     const { cart } = useCart();
 
   const cartCount = cart.length;  

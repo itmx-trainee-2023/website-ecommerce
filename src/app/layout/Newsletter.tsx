@@ -12,8 +12,9 @@ export default function Newsletter() {
   const isShopPage = pathname === '/shop';
   const isProductPage = pathname === '/product';
   const isCartPage = pathname === '/cart';
+  const isPage = pathname === '/';
 
-  if (!isHomePage && !isBlogPostPage&&isShopPage&&isProductPage&&isCartPage) {
+  if (!isHomePage && !isBlogPostPage&&!isShopPage&&!isProductPage&&!isCartPage) {
     return null;
   }
   return (

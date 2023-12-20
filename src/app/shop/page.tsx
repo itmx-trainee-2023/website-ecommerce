@@ -14,6 +14,8 @@ import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
 import Product from '../product/page';
 
+
+
 const Shop: React.FC = () => {
   const { cart, addToCart } = useCart();
   const [data, setData] = useState(null)
@@ -35,7 +37,7 @@ const Shop: React.FC = () => {
       console.log("test");
       axios({
         method: 'get',
-        url: 'https://dummyjson.com/products?limit=10&skip=10',
+        url: 'https://dummyjson.com/products?limit=100&skip=10',
       })
         .then(function (response) {
           let result = []

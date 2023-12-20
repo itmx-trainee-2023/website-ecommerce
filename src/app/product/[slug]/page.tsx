@@ -3,9 +3,6 @@ import React, { useContext, useState, useEffect  } from "react";
 import Image from "next/image";
 import axios from "axios";
 
-type Props = {}
-
-
 
 export default function Page({ params }: { params: { slug: string } }) {
     const [data, setData] = useState(null)
@@ -35,7 +32,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     return (
         <>
         <div>My Post: {params.slug}</div>
-        <div>Product: {data?.title}</div>
+        {/* <div>Product: {data?.title}</div> */}
         </> 
     )
   }
