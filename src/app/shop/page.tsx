@@ -12,7 +12,6 @@ import "./shop.css";
 import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
-import Product from "../product/page";
 
 const Shop: React.FC = () => {
   const handleImageClick = (id: number) => {
@@ -22,6 +21,13 @@ const Shop: React.FC = () => {
     // window.location.href = `/shop/product`;
     window.location.href = `/product/${id}`;
   };
+
+  interface Shops{
+    id:number;
+    images: string;
+    price: string;
+    title: string
+  }
 
   const { cart, addToCart } = useCart();
   const [data, setData] = useState(null);
