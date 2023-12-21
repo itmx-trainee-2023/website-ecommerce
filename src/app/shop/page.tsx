@@ -14,11 +14,9 @@ import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
 
 const Shop: React.FC = () => {
-
   const handleImageClick = (id: number) => {
-  
     // console.log(`Clicked on image with ID: ${id}`);
-    console.log(`${id}`)
+    console.log(`${id}`);
     // ตัวอย่าง: เปิดหน้าใหม่ที่มี URL เช่น `/shop/${id}`
     // window.location.href = `/shop/product`;
     window.location.href = `/product/${id}`;
