@@ -40,7 +40,7 @@ const Shop: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("test");
+        // console.log("test");
         const response = await axios.get<ProductsResponse>("https://dummyjson.com/products?limit=10&skip=20");
         setData(response.data);
       } catch (error) {

@@ -13,6 +13,8 @@ type ProductData = {
     stock: string;
     category: string;
     thumbnail: string;
+    rating: DoubleRange;
+
     // ... คุณสามารถเพิ่ม properties อื่น ๆ ที่ API ส่งมาได้ตามต้องการ
   };
 
@@ -69,8 +71,6 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<ProductData | null>(null);
 //   const [data, setData] = useState(null);
 
-
-  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
