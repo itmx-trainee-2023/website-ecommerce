@@ -5,6 +5,17 @@ import axios from "axios";
 
 type Props = {};
 
+type ProductData = {
+    title: string;
+    description: string;
+    images: string[];
+    price: number;
+    stock: string;
+    category: string;
+    thumbnail: string;
+    // ... คุณสามารถเพิ่ม properties อื่น ๆ ที่ API ส่งมาได้ตามต้องการ
+  };
+
 export default function Page({ params }: { params: { slug: string } }) {
   const [count, setCount] = useState(1);
 
@@ -55,7 +66,9 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, []);
 
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<ProductData | null>(null);
+//   const [data, setData] = useState(null);
+
 
   console.log(data);
 
