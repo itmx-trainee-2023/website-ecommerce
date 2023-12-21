@@ -12,24 +12,9 @@ import "./shop.css";
 import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
+import Product from "../product/page";
 
 const Shop: React.FC = () => {
-  const handleImageClick = (id: number) => {
-    // console.log(`Clicked on image with ID: ${id}`);
-    console.log(`${id}`);
-    // ตัวอย่าง: เปิดหน้าใหม่ที่มี URL เช่น `/shop/${id}`
-    // window.location.href = `/shop/product`;
-    window.location.href = `/product/${id}`;
-  };
-
-  interface Shops{
-    id:number;
-    images: string;
-    price: string;
-    title: string;
-    
-  }
-
   const { cart, addToCart } = useCart();
   const [data, setData] = useState(null);
   // console.log(data);
@@ -48,7 +33,7 @@ const Shop: React.FC = () => {
       console.log("test");
       axios({
         method: "get",
-        url: "https://dummyjson.com/products?limit=10&skip=20",
+        url: "https://dummyjson.com/products?limit=10&skip=10",
       }).then(function (response) {
         let result = [];
         result = response.data;
@@ -63,7 +48,7 @@ const Shop: React.FC = () => {
   return (
     <>
       <div>
-        <div className="relative isolate overflow-hidden sm:py-10">
+      <div className="relative isolate overflow-hidden sm:py-10">
           <div className="flex justify-center">
             <div className="carouse w-4/5 sm:w-2/3 md:w-2/3 lg:w-4/5">
               <div className="relative isolate overflow-hidden py-24 sm:py-48">
@@ -163,9 +148,7 @@ const Shop: React.FC = () => {
                 </div>
                 <div className="pt-10">
                   <div className=" pb-10 lg:flex hidden">
-                    <div className="pr-910 font-bold text-base">
-                      Living Room
-                    </div>
+                    <div className="pr-910 font-bold text-base">Living Room</div>
                     <div className="">
                       <div className="dropdown ml-[600px] text-base">
                         <div tabIndex={0} className="flex font-bold pr-10 ">
