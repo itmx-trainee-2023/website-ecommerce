@@ -33,7 +33,7 @@ const Shop: React.FC = () => {
       console.log("test");
       axios({
         method: "get",
-        url: "https://dummyjson.com/products?limit=10&skip=10",
+        url: "https://dummyjson.com/products?limit=10&skip=20",
       }).then(function (response) {
         let result = [];
         result = response.data;
