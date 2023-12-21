@@ -14,12 +14,16 @@ import { useCart } from "../context/CartContext";
 import axios from "axios";
 import { Itim } from "next/font/google";
 
-interface Product {
-  name: string;
+export interface Product {
+  id: number;
+  title: string;
   price: number;
-  productimg: string;
-  quantity?: number;
+  quantity: number;
+  total: string;
+  discountPercentage: number;
+  discountPrice: number;
   imageURL: string;
+  thumbnail: string;
 }
 
 function CART() {
@@ -42,9 +46,9 @@ function CART() {
     }
   };
 
-  const updateCart = (product: { name: string }, newQuantity: number) => {
+  const updateCart = (product: { title: string }, newQuantity: number) => {
     const updatedCart = cart.map((item) => {
-      if (item.name === product.name) {
+      if (item.name === product.title) {
         return { ...item, quantity: newQuantity };
       }
       return item;
@@ -78,9 +82,7 @@ function CART() {
 
         setData(data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } catch (error) {}
     };
 
     fetchData();
@@ -262,84 +264,83 @@ function CART() {
 
                 {/*  */}
               </div>
-              {data &&
-                data.map((item, index) => (
-                  <div
-                    key={index}
-                    className="lg:flex lg:items-center items-center flex lg:border-b-2 lg:border-Slate-200 border-b-2 border-Slate-200 w-full"
-                  >
-                    <div className="w-1/2 px-1 py-2">
-                      <div className="lg:flex lg:items-center items-center flex">
-                        <Image
-                          src={item.imageURL}
-                          alt={item.name}
-                          width={80}
-                          height={80}
-                          className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
-                        />
+              {data?.map((item, index) => (
+                <div
+                  key={index}
+                  className="lg:flex lg:items-center items-center flex lg:border-b-2 lg:border-Slate-200 border-b-2 border-Slate-200 w-full"
+                >
+                  <div className="w-1/2 px-1 py-2">
+                    <div className="lg:flex lg:items-center items-center flex">
+                      <Image
+                        src={item.thumbnail}
+                        alt={item.thumbnail}
+                        width={80}
+                        height={80}
+                        className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
+                      />
 
-                        <div className=" ml-2 flex flex-col mt-2 mr-28 ">
-                          <div className="lg:text-sm text-sm ">Try Table</div>
-                          <span className=" text-xs text-black lg:text-xs ">
-                            color: Black
-                          </span>
+                      <div className=" ml-2 flex flex-col mt-2 mr-28 ">
+                        <div className="lg:text-sm text-sm ">Try Table</div>
+                        <span className=" text-xs text-black lg:text-xs ">
+                          color: Black
+                        </span>
+                        <button
+                          className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden"
+                          // onClick={(event) => removeItem(event)}
+                        >
+                          X Remove
+                        </button>
+                        <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
                           <button
-                            className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden"
-                            onClick={(event) => removeItem(event, item)}
+                            // onClick={() => decreaseQuantity(item)}
+                            className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
-                            X Remove
+                            <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
-                          <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
-                            <button
-                              onClick={() => decreaseQuantity(item)}
-                              className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
-                            >
-                              <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
-                            </button>
-                            <span className=" px-1">{quantity}</span>
-                            <button
-                              onClick={() => increaseQuantity(item)}
-                              className=" px-1  md:rounded-r md:w-1/2"
-                            >
-                              <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
-                            </button>
-                          </div>
+                          <span className=" px-1">{quantity}</span>
+                          <button
+                            // onClick={() => increaseQuantity(item)}
+                            className=" px-1  md:rounded-r md:w-1/2"
+                          >
+                            <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
+                          </button>
                         </div>
                       </div>
                     </div>
-                    <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
-                      <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
-                        <span className=" text-sm text-left ml-4">
-                          ${item.price}
-                        </span>
-                        <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
-                          X
-                        </button>
-                      </div>
-                      <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
-                        <button
-                          onClick={() => decreaseQuantity(item)}
-                          className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
-                        >
-                          <MinusIcon className="h-3 w-3 text-gray-700" />
-                        </button>
-                        <span className=" px-1 py-2">{quantity}</span>
-                        <button
-                          onClick={() => increaseQuantity(item)}
-                          className=" px-1 py-2 md:rounded-r md:w-1/2"
-                        >
-                          <PlusIcon className="h-3 w-3 text-gray-700" />
-                        </button>
-                      </div>
+                  </div>
+                  <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
+                    <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
+                      <span className=" text-sm text-left ml-4">
+                        ${item.price}
+                      </span>
+                      <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
+                        X
+                      </button>
                     </div>
-                    <div className="w-full px-4 py-2 text-center lg:flex hidden lg:mr-5">
-                      ${item.price}
-                    </div>
-                    <div className="w-full px-4 py-2 text-center lg:flex hidden ">
-                      ${item.price}
+                    <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
+                      <button
+                        // onClick={() => decreaseQuantity(item)}
+                        className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
+                      >
+                        <MinusIcon className="h-3 w-3 text-gray-700" />
+                      </button>
+                      <span className=" px-1 py-2">{quantity}</span>
+                      <button
+                        // onClick={() => increaseQuantity(item)}
+                        className=" px-1 py-2 md:rounded-r md:w-1/2"
+                      >
+                        <PlusIcon className="h-3 w-3 text-gray-700" />
+                      </button>
                     </div>
                   </div>
-                ))}
+                  <div className="w-full px-4 py-2 text-center lg:flex hidden lg:mr-5">
+                    ${item.price}
+                  </div>
+                  <div className="w-full px-4 py-2 text-center lg:flex hidden ">
+                    ${item.price}
+                  </div>
+                </div>
+              ))}
 
               <div className="md:w-2/3 w-full mx-auto mt-8 md:ml-2 ">
                 <div className=" mt-12 let-100 flex flex-col ">
