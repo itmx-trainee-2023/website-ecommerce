@@ -14,8 +14,6 @@ import review2 from "../../../public/img/product/review2.png";
 import review3 from "../../../public/img/product/review3.png";
 import review4 from "../../../public/img/product/review4.png";
 import review5 from "../../../public/img/product/review5.png";
-import { shops } from "../shop/shop";
-import { useRouter } from "next/router";
 
 const Product = () => {
 
