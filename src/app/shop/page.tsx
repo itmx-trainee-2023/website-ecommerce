@@ -1,7 +1,7 @@
 "use client";
-"use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Image from "next/image";
+import axios from "axios";
 import headerimg from "../../../public/img/Image Placeholder header.png";
 import vectorfilter from "../../../public/img/Vector.png";
 import grid3x3 from "../../../public/img/grid3x3.png";
@@ -12,19 +12,13 @@ import "./shop.css";
 import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
+import Product from "../product/page";
 
 const Shop: React.FC = () => {
-
-  const handleImageClick = (id: number) => {
-  
-    // console.log(`Clicked on image with ID: ${id}`);
-    console.log(`${id}`)
-    // ตัวอย่าง: เปิดหน้าใหม่ที่มี URL เช่น `/shop/${id}`
-    // window.location.href = `/shop/product`;
-    window.location.href = `/product/${id}`;
-  };
-
   const { cart, addToCart } = useCart();
+  const [data, setData] = useState(null);
+  // console.log(data);
+
   const handleAddToCart = (
     productName: string,
     productPrice: number,
@@ -33,10 +27,28 @@ const Shop: React.FC = () => {
     addToCart(productName, productPrice, productImage);
     // ตัวเลือก: คุณสามารถอัปเดตจำนวนรายการในส่วนหัวได้ที่นี่
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("test");
+      axios({
+        method: "get",
+        url: "https://dummyjson.com/products?limit=10&skip=10",
+      }).then(function (response) {
+        let result = [];
+        result = response.data;
+        // console.log(result);
+        setData(result);
+      });
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div>
-        <div className="relative isolate overflow-hidden">
+      <div className="relative isolate overflow-hidden sm:py-10">
           <div className="flex justify-center">
             <div className="carouse w-4/5 sm:w-2/3 md:w-2/3 lg:w-4/5">
               <div className="relative isolate overflow-hidden py-24 sm:py-48">
@@ -64,8 +76,7 @@ const Shop: React.FC = () => {
                 <div className="pr-35 pb-50 pt-10 float-left ml-5 lg:flex hidden mr-5">
                   <div>
                     <div className="flex">
-                      <Image src={vectorfilter} alt={""} />
-                      <p className="font-bold pr-5 pl-3">Filter</p>
+                      <p className="font-bold pr-5 text-lg">Filter</p>
                     </div>
                     <div className="font-bold pt-5 pb-5">
                       <p>CATEGORIES</p>
@@ -137,9 +148,9 @@ const Shop: React.FC = () => {
                 </div>
                 <div className="pt-10">
                   <div className=" pb-10 lg:flex hidden">
-                    <div className="pr-96 font-bold">Living Room</div>
-                    <div className="ml-48">
-                      <div className="dropdown">
+                    <div className="pr-910 font-bold text-base">Living Room</div>
+                    <div className="">
+                      <div className="dropdown ml-[600px] text-base">
                         <div tabIndex={0} className="flex font-bold pr-10 ">
                           Sort by
                           <svg
@@ -184,103 +195,117 @@ const Shop: React.FC = () => {
                 <div>
                   <div className="bg-white ">
                     <div className="mx-auto max-w-7xl ">
-                      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:max-w-none lg:grid-cols-3 lg:px-0 px-24">
-                        {shops.map((data, index) => (
-                          <div
-                            key={index}
-                            className="flex max-w-xl flex-col items-start justify-between relative"
-                          >
-                            <div className="card flex items-center gap-x-4 text-xs">
-                              <Image
-                                src={data.img}
-                                alt={`Shop ${index + 1}`}
-                                width={500}
-                                onClick={() => handleImageClick(data.id)}
-                              />
-                              <div className="indicator absolute top-3 left-5 h-7 w-20">
-                                <p className="text-black bg-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm font-bold">
-                                  NEW
-                                </p>
-                                <div className="indicator absolute top-8 h-7 w-20 pt-2">
-                                  <p className="text-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm bg-emerald-400 font-bold">
-                                    -50%
-                                  </p>
-                                  <div className="card-body">
-                                    <button
-                                      className="flex-none flex items-center justify-center w-10 h-10 rounded-full text-white border border-slate-200 bg-white ml-44 mt-72"
-                                      type="button"
-                                      aria-label="Like"
+                      <div>
+                        <div>
+                          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:max-w-none lg:grid-cols-3 lg:px-0 px-24">
+                            {data?.products.map((data, index) => (
+                              <>
+                                <Link
+                                  key={data.id}
+                                  href={{
+                                    pathname: `/product/${data.id}`,
+                                    // query: { slug: data.id },
+                                  }}
+                                >
+                                  <div
+                                    className="bg-white border-2 mr-60"
+                                    style={{
+                                      width: "300px",
+                                      height: "400px",
+                                      boxShadow:
+                                        "0px 5px 10px 6px rgba(0, 0, 0, 0.1)", // เพิ่ม box-shadow
+                                      borderRadius: "5px", // เพิ่มขอบมน
+                                      overflow: "hidden", // ตัดรูปภาพเมื่อมีการปรับขนาด
+                                    }}
+                                  >
+                                    <div
+                                      className="flex max-w-xl flex-col items-start justify-between relative mr-56 "
+                                      style={{
+                                        width: "300px",
+                                        height: "300px",
+                                        marginBottom: "10px",
+                                      }}
                                     >
-                                      <svg
-                                        className="stroke-gray-500 text-white"
-                                        width="20"
-                                        height="20"
-                                        fill="currentColor"
-                                        aria-hidden="true"
-                                        strokeWidth="2"
+                                      <div
+                                        className="relative"
+                                        style={{
+                                          width: "100%",
+                                          height: "100%",
+                                        }}
                                       >
-                                        <path
-                                          fillRule="evenodd"
-                                          clipRule="evenodd"
-                                          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                                        <Image
+                                          src={data.images[0]}
+                                          alt={`Shop ${index + 1}`}
+                                          width={400}
+                                          height={100}
+                                          className="w-full h-full object-cover"
+                                          style={{
+                                            objectFit: "cover",
+                                            objectPosition: "center",
+                                            aspectRatio: "1 / 1",
+                                          }}
                                         />
-                                      </svg>
-                                    </button>
-                                    <button
-                                      className="card-btn mt-64"
-                                      onClick={() =>
-                                        handleAddToCart(
-                                          data.name,
-                                          data.price,
-                                          data.img.src
-                                        )
-                                      }
-                                    >
-                                      Add to Cart
-                                    </button>
+                                      </div>
+                                      <div className="indicator absolute top-3 left-5 h-7 w-2">
+                                        <p className="text-black bg-white p-3 rounded-md w-15 h-7 flex items-center justify-center text-sm font-bold">
+                                          NEW
+                                        </p>
+                                        <div className="indicator absolute top-8 h-7 w-20 pt-2">
+                                          <p className="text-white p-3 rounded-md w-15 h-7 flex items-center justify-center text-sm bg-emerald-400 font-bold">
+                                            -50%
+                                          </p>
+                                        </div>
+                                        <div className="card-body">
+                                          <button
+                                            className="flex-none flex items-center justify-center w-10 h-10 rounded-full text-white border border-slate-200 bg-white ml-44 mt-72"
+                                            type="button"
+                                            aria-label="Like"
+                                          >
+                                            <svg
+                                              className="stroke-gray-500 text-white"
+                                              width="20"
+                                              height="20"
+                                              fill="currentColor"
+                                              aria-hidden="true"
+                                              strokeWidth="2"
+                                            >
+                                              <path
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                                              />
+                                            </svg>
+                                          </button>
+                                          <div className="">
+                                            <button
+                                              className="card-btn"
+                                              onClick={() =>
+                                                handleAddToCart(
+                                                  data.name,
+                                                  data.price,
+                                                  data.img.src
+                                                )
+                                              }
+                                            >
+                                              Add to Cart
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="font-bold ml-5">
+                                      {data.title}
+                                      <br />
+                                      <span>${data.price}</span>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className=" justify-items-start mt-5 ">
-                              <div className="rating rating-sm ">
-                                <input
-                                  type="radio"
-                                  name="rating-9"
-                                  className="mask mask-star"
-                                />
-                                <input
-                                  type="radio"
-                                  name="rating-9"
-                                  className="mask mask-star"
-                                />
-                                <input
-                                  type="radio"
-                                  name="rating-9"
-                                  className="mask mask-star"
-                                />
-                                <input
-                                  type="radio"
-                                  name="rating-9"
-                                  className="mask mask-star"
-                                />
-                                <input
-                                  type="radio"
-                                  name="rating-9"
-                                  className="mask mask-star"
-                                  checked
-                                />
-                              </div>
-                            </div>
-                            <div className="font-bold mt-2">
-                              {data.name}
-                              <br />
-                              <span>${data.price}</span>
-                            </div>
+                                </Link>
+                              </>
+                            ))}
                           </div>
-                        ))}
+                        </div>
                       </div>
-                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0">
+                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0 mb-10">
                         <button className="btn btn-outline rounded-full w-60">
                           Show more
                         </button>
