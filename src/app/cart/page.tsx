@@ -29,45 +29,44 @@ export interface Product {
 function CART() {
   const [step, setStep] = useState(1);
   const [quantity, setQuantity] = useState(1);
-  const { cart, setCart } = useCart();
-
-  const increaseQuantity = (product: Product) => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    updateCart(product, newQuantity);
-  };
-
-  const decreaseQuantity = (product: Product) => {
-    console.log("produxt", product);
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateCart(product, newQuantity);
-    }
-  };
-
-  const updateCart = (product: { title: string }, newQuantity: number) => {
-    const updatedCart = cart.map((item) => {
-      if (item.name === product.title) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    });
-
-    setCart(updatedCart);
-  };
-
-  const removeItem = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    product: { name: string }
-  ) => {
-    // ทำสิ่งที่คุณต้องการกับ event และ product
-    const updatedCart = cart.filter((item) => item.name !== product.name);
-    setCart(updatedCart);
-  };
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Product[] | null>(null);
+
+  const increaseQuantity = (productId: number) => {
+    setData((prevData) => {
+      if (!prevData) {
+        // จัดการกรณีที่ data เป็น null
+        return null;
+      }
+
+      const updatedData = prevData.map((product) => {
+        if (product.id === productId) {
+          return { ...product, quantity: product.quantity + 1 };
+        }
+        return product;
+      });
+
+      return updatedData;
+    });
+  };
+
+  const decreaseQuantity = (productId: number) => {
+    const updatedData = (data ?? []).map((product) => {
+      if (product.id === productId && product.quantity > 1) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    });
+    setData(updatedData);
+  };
+
+  const removeProduct = (productId: number) => {
+    const updatedData = (data ?? []).filter(
+      (product) => product.id !== productId
+    );
+    setData(updatedData);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -286,20 +285,20 @@ function CART() {
                         </span>
                         <button
                           className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden"
-                          // onClick={(event) => removeItem(event)}
+                          onClick={() => removeProduct(item.id)}
                         >
                           X Remove
                         </button>
                         <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
                           <button
-                            // onClick={() => decreaseQuantity(item)}
+                            onClick={() => decreaseQuantity(item.id)}
                             className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                           >
                             <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
                           <span className=" px-1">{quantity}</span>
                           <button
-                            // onClick={() => increaseQuantity(item)}
+                            onClick={() => increaseQuantity(item.id)}
                             className=" px-1  md:rounded-r md:w-1/2"
                           >
                             <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
@@ -319,14 +318,14 @@ function CART() {
                     </div>
                     <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
                       <button
-                        // onClick={() => decreaseQuantity(item)}
+                        onClick={() => decreaseQuantity(item.id)}
                         className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
                       <span className=" px-1 py-2">{quantity}</span>
                       <button
-                        // onClick={() => increaseQuantity(item)}
+                        onClick={() => increaseQuantity(item.id)}
                         className=" px-1 py-2 md:rounded-r md:w-1/2"
                       >
                         <PlusIcon className="h-3 w-3 text-gray-700" />

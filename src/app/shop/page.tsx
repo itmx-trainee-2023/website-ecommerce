@@ -13,48 +13,38 @@ import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
 
+interface Shop {
+  id: number;
+  title: string;
+  price: number;
+  images: string[];
+}
+
+interface ProductsResponse {
+  products: Shop[];
+}
+
 const Shop: React.FC = () => {
   const handleImageClick = (id: number) => {
-    // console.log(`Clicked on image with ID: ${id}`);
-    console.log(`${id}`);
-    // ตัวอย่าง: เปิดหน้าใหม่ที่มี URL เช่น `/shop/${id}`
-    // window.location.href = `/shop/product`;
     window.location.href = `/product/${id}`;
   };
 
-  interface Shops{
-    id:number;
-    images: string;
-    price: string;
-    title: string;
-    
-  }
-
   const { cart, addToCart } = useCart();
-  const [data, setData] = useState(null);
-  // console.log(data);
+  const [data, setData] = useState<ProductsResponse | null>(null);
 
-  const handleAddToCart = (
-    productName: string,
-    productPrice: number,
-    productImage: string
-  ) => {
+  const handleAddToCart = (productName: string, productPrice: number, productImage: string) => {
     addToCart(productName, productPrice, productImage);
     // ตัวเลือก: คุณสามารถอัปเดตจำนวนรายการในส่วนหัวได้ที่นี่
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("test");
-      axios({
-        method: "get",
-        url: "https://dummyjson.com/products?limit=10&skip=20",
-      }).then(function (response) {
-        let result = [];
-        result = response.data;
-        // console.log(result);
-        setData(result);
-      });
+      try {
+        // console.log("test");
+        const response = await axios.get<ProductsResponse>("https://dummyjson.com/products?limit=10&skip=20");
+        setData(response.data);
+      } catch (error) {
+      }
     };
 
     fetchData();
@@ -296,13 +286,13 @@ const Shop: React.FC = () => {
                                           <div className="">
                                             <button
                                               className="card-btn"
-                                              onClick={() =>
-                                                handleAddToCart(
-                                                  data.name,
-                                                  data.price,
-                                                  data.img.src
-                                                )
-                                              }
+                                              // onClick={() =>
+                                              //   handleAddToCart(
+                                              //     data.name,
+                                              //     data.price,
+                                              //     data.img.src
+                                              //   )
+                                              // }
                                             >
                                               Add to Cart
                                             </button>
