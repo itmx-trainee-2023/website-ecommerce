@@ -1,29 +1,44 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import ticket from "../../../public/image/Homepage/ticket-percent.png";
 import close from "../../../public/image/Homepage/close.png";
 
+interface HomePageProps {
+  isFirstVisit: boolean;
+}
 export default function Advertise() {
-  const pathname = usePathname();
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
+  useEffect(() => {
+    // ตรวจสอบว่ามีคุกกี้ 'visited'ไหม
+    const visited = document.cookie.includes('visited=true');
+    // ถ้าไม่มีคุกกี้ 'visited' ให้ตั้งค่าคุกกี้และปรับ state
+    if (!visited) {
+      document.cookie = 'visited=true; max-age=5'; 
+      setIsFirstVisit(true);
+    } else {
+      setIsFirstVisit(false);
+    }
+  }, []);
+
+  const pathname = usePathname();
   const isHomePage = pathname === "/homepage";
 
   if (!isHomePage) {
     return null;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isVisible, setIsVisible] = useState(true);
-
   const handleDismiss = () => {
     setIsVisible(false);
   };
 
+
   return (
     <>
-      {isVisible && (
+    {isVisible&& (
         <div className="relative isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1 shadow">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Image className="" src={ticket} alt={""} />

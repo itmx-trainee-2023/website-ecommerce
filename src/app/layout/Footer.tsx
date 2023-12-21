@@ -25,12 +25,12 @@ export default function Footer() {
     <>
     <footer className="footer footer-center p-10 bg-zinc-900 text-base-content">
         <nav className="flex flex-col md:flex-row items-center justify-between gap-4  lg:gap-24">
-          <h1 className="text-white text-2xl md:text-3xl lg:text-4xl font-semibold">
+          <a href="#"><h1 className="text-white text-2xl md:text-3xl lg:text-4xl font-semibold">
             3legant
             <strong style={{ fontWeight: "bold", color: "gray" }}>
               .
             </strong>{" "}
-          </h1>
+          </h1></a>
           <div className=" lg:w-4/5 border-b border-gray lg:mt-4 w-8 mt-0 lg:mb-0 mb-2 lg:hidden"></div>
           <Image
             className="hidden lg:block lg:-ml-14"
@@ -47,6 +47,7 @@ export default function Footer() {
             <Link href="/blog1" className="text-white">
               Blog
             </Link>
+            
             <a className="link link-hover text-white">Contact Us</a>
           </div>
         </nav>

@@ -14,7 +14,7 @@ interface BlogData {
 }
 
 function Blogpost({ params }: { params: { slug: string } }) {
-  const [data, setData] = useState<BlogData | null>(null);
+  const [blogpost, setData] = useState<BlogData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +52,7 @@ function Blogpost({ params }: { params: { slug: string } }) {
 
         <div className="ml-10 md:ml-40 mr-1">
           <h1 className="text-3xl md:text-5xl font-medium mt-6">
-            {data?.title}
+            {blogpost?.title}
           </h1>
         </div>
 
@@ -70,10 +70,10 @@ function Blogpost({ params }: { params: { slug: string } }) {
         </div>
 
         <div className="lg:ml-40 lg:w-4/5 lg:p-0 lg:pt-0 lg:pb-0 p-12 pt-2 pb-1">
-        <Image src={data?.images[0] ?? ''} alt={"shop"} width={500} height={200} />
+        <Image src={blogpost?.images[0] ?? ''} alt={"shop"} width={500} height={200} />
 
           <p className="mt-10 text-base font-normal">
-            {data?.description}
+            {blogpost?.description}
           </p>
           <h1 className=" mt-2 text-3xl font-semibold">
             A cleaning hub with built-in ventilation
@@ -88,12 +88,12 @@ function Blogpost({ params }: { params: { slug: string } }) {
         <div className="mx-auto max-w-screen-xl lg:ml-40 mt-8 lg:p-0 lg:pt-0 lg:pb-0 p-12 pt-2 pb-1">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w1/2">
-            <Image src={data?.images[1] ?? ''} alt={"shop"} width={500} height={200} />
+            <Image src={blogpost?.images[1] ?? ''} alt={"shop"} width={500} height={200} />
 
             </div>
 
             <div className="w-full md:w1/2">
-            <Image src={data?.images[2] ?? ''} alt={"shop"} width={500} height={200} />
+            <Image src={blogpost?.images[2] ?? ''} alt={"shop"} width={500} height={200} />
 
             </div>
           </div>
@@ -123,7 +123,7 @@ function Blogpost({ params }: { params: { slug: string } }) {
         <div className="mx-auto max-w-screen-xl lg:ml-40 mt-8 lg:p-0 lg:pt-0 lg:pb-0 p-12 pt-2 pb-1">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w1/2">
-            <Image src={data?.images[3] ?? ''} alt={"shop"} width={500} height={200} />
+            <Image src={blogpost?.images[3] ?? ''} alt={"shop"} width={500} height={200} />
 
             </div>
 

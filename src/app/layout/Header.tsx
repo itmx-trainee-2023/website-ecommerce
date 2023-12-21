@@ -28,7 +28,6 @@ interface Product {
   thumbnail: string;
   images: string[];
 }
-
 interface ResultsPageProps {
   results: Product[];
 }
@@ -112,7 +111,7 @@ const Header : React.FC<ResultsPageProps> = () => {
 
                 <ul className="menu p-4 w-11/12 min-h-full bg-white text-base-content">
                   <div className="flex justify-between items-center p-2">
-                    <h1 className="text-lg font-semibold">3legant.</h1>
+                    <Link href={"/homepage"}><h1 className="text-lg font-semibold">3legant.</h1></Link>
                     <button>
                       <Image
                         src={close}
@@ -207,7 +206,7 @@ const Header : React.FC<ResultsPageProps> = () => {
               </div>
             </div>
           </div>
-          <a className=" font-semibold text-xl ml-0 lg:float-left lg:ml-36 sm:ml-32 ">
+          <a href="#" className=" font-semibold text-xl ml-0 lg:float-left lg:ml-36 sm:ml-32 ">
             3legant.
           </a>
         </div>
