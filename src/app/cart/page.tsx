@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/component.module.css";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
@@ -11,12 +11,15 @@ import img3 from "../../../public/image/Product/ImagePlaceholder3.png";
 import img4 from "../../.././public/image/Product/ticket-percent.png";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { useCart } from "../context/CartContext";
+import axios from "axios";
+import { Itim } from "next/font/google";
 
 interface Product {
   name: string;
   price: number;
   productimg: string;
   quantity?: number;
+  imageURL: string;
 }
 
 function CART() {
@@ -31,6 +34,7 @@ function CART() {
   };
 
   const decreaseQuantity = (product: Product) => {
+    console.log("produxt", product);
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
@@ -58,8 +62,37 @@ function CART() {
     setCart(updatedCart);
   };
 
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<Product[] | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://dummyjson.com/carts/1");
+        const result = response.data;
+
+        console.log("result", result);
+
+        // Assume 'products' is the array you want to use in your component
+        const data = Array.isArray(result.products) ? result.products : [];
+
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="text-center mx-auto  items-center justify-center">
+      {loading && <div>Loading...</div>}
       <h1 className={styles.text}>Cart</h1>
       <div className=" h-[66px] lg:justify-center items-start gap-8 inline-flex w-full justify-start">
         <div className="w-full lg:w-64 pb-[26px] lg:border-b-2  flex-col justify-start items-start gap-6 lg:flex border-b-2 hidden">
@@ -209,41 +242,42 @@ function CART() {
       {step === 1 && (
         <>
           <div className="lg:flex flex-col lg:flex-row flex lg:pl-32 w-full lg:pr-10">
-            {cart?.length > 0 && (
-              <div className=" lg:mt-10 lg:mr-4 w-full mt-10 mr-4 ">
-                <div className="w-full lg:border-b-2 lg:border-Slate-950  border-b-2 border-Slate-950">
-                  <div className="lg:flex  flex  justify-around ">
-                    <div className=" lg:px-4 lg:py-2 lg:text-center w-full px-4 py-2 text-left ">
-                      Product
-                    </div>
-                    <div className="w-full px-2 py-2 ml-12 text-center lg:flex hidden   lg:px-4 lg:py-2 lg:ml-4 lg:text-center ">
-                      Quantity
-                    </div>
-                    <div className="w-full px-2 py-2 text-center ml-4 lg:flex hidden  lg:px-4 lg:py-2 lg:text-center ">
-                      Price
-                    </div>
-                    <div className="w-full px-2 py-2 ml-2 text-center lg:flex hidden  lg:px-4 lg:py-2 lg:ml-4 lg:text-center">
-                      Subtotal
-                    </div>
+            <div className=" lg:mt-10 lg:mr-4 w-full mt-10 mr-4 ">
+              <div className="w-full lg:border-b-2 lg:border-Slate-950  border-b-2 border-Slate-950">
+                <div className="lg:flex  flex  justify-around ">
+                  <div className=" lg:px-4 lg:py-2 lg:text-center w-full px-4 py-2 text-left ">
+                    Product
                   </div>
-                  <div className="w-full border-b-2 border-Slate-300  lg:w-full lg:border-b-2 lg:border-Slate-300"></div>
-
-                  {/*  */}
+                  <div className="w-full px-2 py-2 ml-12 text-center lg:flex hidden   lg:px-4 lg:py-2 lg:ml-4 lg:text-center ">
+                    Quantity
+                  </div>
+                  <div className="w-full px-2 py-2 text-center ml-4 lg:flex hidden  lg:px-4 lg:py-2 lg:text-center ">
+                    Price
+                  </div>
+                  <div className="w-full px-2 py-2 ml-2 text-center lg:flex hidden  lg:px-4 lg:py-2 lg:ml-4 lg:text-center">
+                    Subtotal
+                  </div>
                 </div>
-                {cart.map((product) => (
+                <div className="w-full border-b-2 border-Slate-300  lg:w-full lg:border-b-2 lg:border-Slate-300"></div>
+
+                {/*  */}
+              </div>
+              {data &&
+                data.map((item, index) => (
                   <div
-                    key={product.name}
+                    key={index}
                     className="lg:flex lg:items-center items-center flex lg:border-b-2 lg:border-Slate-200 border-b-2 border-Slate-200 w-full"
                   >
                     <div className="w-1/2 px-1 py-2">
                       <div className="lg:flex lg:items-center items-center flex">
                         <Image
-                          src={product.productimg}
-                          alt={product.name}
+                          src={item.imageURL}
+                          alt={item.name}
                           width={80}
                           height={80}
                           className="lg:flex-shrink-0 lg:flex-grow-0 flex-shrink-0 flex-grow-0 "
                         />
+
                         <div className=" ml-2 flex flex-col mt-2 mr-28 ">
                           <div className="lg:text-sm text-sm ">Try Table</div>
                           <span className=" text-xs text-black lg:text-xs ">
@@ -251,20 +285,20 @@ function CART() {
                           </span>
                           <button
                             className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost lg:flex hidden"
-                            onClick={(event) => removeItem(event, product)}
+                            onClick={(event) => removeItem(event, item)}
                           >
                             X Remove
                           </button>
                           <div className="border p-2 w-22 h-8  justify-center   flex   lg:hidden">
                             <button
-                              onClick={() => decreaseQuantity(product)}
+                              onClick={() => decreaseQuantity(item)}
                               className=" px-1  md:rounded-l md:w-1/2 g:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                             >
                               <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                             </button>
-                            <span className=" px-1">{product.quantity}</span>
+                            <span className=" px-1">{quantity}</span>
                             <button
-                              onClick={() => increaseQuantity(product)}
+                              onClick={() => increaseQuantity(item)}
                               className=" px-1  md:rounded-r md:w-1/2"
                             >
                               <PlusIcon className="h-3 w-3 mt-1  text-gray-700" />
@@ -276,7 +310,7 @@ function CART() {
                     <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
                       <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
                         <span className=" text-sm text-left ml-4">
-                          ${product.price}
+                          ${item.price}
                         </span>
                         <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
                           X
@@ -284,14 +318,14 @@ function CART() {
                       </div>
                       <div className="border p-2 md:rounded-lg w-full  justify-center lg:border lg:p-2 lg:rounded-lg  lg:flex lg:justify-end lg:w-20  hidden">
                         <button
-                          onClick={() => decreaseQuantity(product)}
+                          onClick={() => decreaseQuantity(item)}
                           className=" px-1 py-2 md:rounded-l md:w-1/2  lg:px-1 lg:py-2 lg:rounded-l lg:w-1/2"
                         >
                           <MinusIcon className="h-3 w-3 text-gray-700" />
                         </button>
                         <span className=" px-1 py-2">{quantity}</span>
                         <button
-                          onClick={() => increaseQuantity(product)}
+                          onClick={() => increaseQuantity(item)}
                           className=" px-1 py-2 md:rounded-r md:w-1/2"
                         >
                           <PlusIcon className="h-3 w-3 text-gray-700" />
@@ -299,47 +333,48 @@ function CART() {
                       </div>
                     </div>
                     <div className="w-full px-4 py-2 text-center lg:flex hidden lg:mr-5">
-                      ${product.price}
+                      ${item.price}
                     </div>
                     <div className="w-full px-4 py-2 text-center lg:flex hidden ">
-                      ${product.price}
+                      ${item.price}
                     </div>
                   </div>
                 ))}
-                <div className="md:w-2/3 w-full mx-auto mt-8 md:ml-2 ">
-                  <div className=" mt-12 let-100 flex flex-col ">
-                    <span className="font-bold text-left w-full">
-                      Have a coupon?
-                    </span>
-                    <span className="text-left mt-3">
-                      Add your code for an instant cart discount
-                    </span>
-                    <div className="border p-1 rounded-lg flex items-center w-full md:w-96 mt-4">
-                      <span className="mb-2">
-                        <Image
-                          src={img4}
-                          alt={""}
-                          width={20}
-                          height={20}
-                          className="h-6 w-6 text-Slate-400 text-opacity-50 "
-                        />
-                      </span>
-                      <input
-                        type="text"
-                        placeholder="Coupon Code"
-                        className="input-ghost w-full "
+
+              <div className="md:w-2/3 w-full mx-auto mt-8 md:ml-2 ">
+                <div className=" mt-12 let-100 flex flex-col ">
+                  <span className="font-bold text-left w-full">
+                    Have a coupon?
+                  </span>
+                  <span className="text-left mt-3">
+                    Add your code for an instant cart discount
+                  </span>
+                  <div className="border p-1 rounded-lg flex items-center w-full md:w-96 mt-4">
+                    <span className="mb-2">
+                      <Image
+                        src={img4}
+                        alt={""}
+                        width={20}
+                        height={20}
+                        className="h-6 w-6 text-Slate-400 text-opacity-50 "
                       />
-                      <button
-                        type="submit"
-                        className="justify-right text-hover:text-purple ml-auto w-30 "
-                      >
-                        Apply
-                      </button>
-                    </div>
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Coupon Code"
+                      className="input-ghost w-full "
+                    />
+                    <button
+                      type="submit"
+                      className="justify-right text-hover:text-purple ml-auto w-30 "
+                    >
+                      Apply
+                    </button>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
+
             <div className="md:w-1/2 w-full md:ml-auto mt-11 border p-4 rounded-lg md:order-last  ">
               <div className="text-left">
                 <span className="font-bold text-lg ">Cart summary</span>
