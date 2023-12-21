@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { usePathname } from "next/navigation";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import close from "../../../public/image/Homepage/close.png";
@@ -32,7 +32,7 @@ interface ResultsPageProps {
   results: Product[];
 }
 
-const Header : React.FC<ResultsPageProps> = () => {
+const Header: React.FC<ResultsPageProps> = () => {
   const [showInput, setShowInput] = useState(false);
   const pathname = usePathname();
   const isPage = pathname === "/";
@@ -40,15 +40,19 @@ const Header : React.FC<ResultsPageProps> = () => {
   const isSignUpPage = pathname === "/signup";
   const [originalData, setOriginalData] = useState<Product[]>([]);
   const [filteredData, setFilteredData] = useState<Product[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [search,setSearch] =  useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
+  const { cart } = useCart();
+
+  const cartCount = cart.length;
+
   useEffect(() => {
-    fetch('https://dummyjson.com/products/search?q=phone')
+    fetch("https://dummyjson.com/products/search?q=phone")
       .then((res) => res.json())
       .then((data) => {
-        // console.log('Data received:', data);
+        console.log('Data received:', data);
         setOriginalData(data.products);
         setFilteredData(data.products);
       });
@@ -59,7 +63,7 @@ const Header : React.FC<ResultsPageProps> = () => {
       result.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredData(filteredResults);
-    // console.log('search:',filteredResults) 
+    console.log('search:',filteredResults)
   };
 
   const handleButtonClick = () => {
@@ -69,7 +73,6 @@ const Header : React.FC<ResultsPageProps> = () => {
   if (isSignInPage || isSignUpPage || isPage) {
     return null;
   }
-  
 
   const toggleSidebar = () => {
     setSidebarVisible(true);
@@ -78,10 +81,9 @@ const Header : React.FC<ResultsPageProps> = () => {
     setSidebarVisible(false);
   };
 
-  
-    const { cart } = useCart();
-
-  const cartCount = cart.length;  
+  fetch("https://dummyjson.com/products/search?q=phone")
+    .then((res) => res.json())
+    .then(console.log);
 
   return (
     <>
@@ -227,30 +229,31 @@ const Header : React.FC<ResultsPageProps> = () => {
           </ul>
         </div>
         <div className="navbar-end lg:ml-8">
-        {showInput && (
-              <input
+          {showInput && (
+            <input
               className="input input-bordered w-52 mr-6"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder=""
-              />
-              
-              
-            )}
-             {showInput && (
-        <Link href={{ pathname: '/search', query: { results: JSON.stringify(filteredData) } }}>
-          <button  className="float-left" onClick={handleSearch}>
-            Search
-          </button>
-        </Link>
-      )}
-             
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder=""
+            />
+          )}
+          {showInput && (
+            <Link
+              href={{
+                pathname: "/search",
+                query: { results: JSON.stringify(filteredData) },
+              }}
+            >
+              <button className="float-left" onClick={handleSearch}>
+                Search
+              </button>
+            </Link>
+          )}
         </div>
-        
+
         <div className="navbar-end mr- lg:flex  lg:mr-36">
           <div className=" float-left">
-           
             <button
               className="btn btn-ghost btn-circle hidden lg:flex"
               onClick={handleButtonClick}
@@ -270,9 +273,8 @@ const Header : React.FC<ResultsPageProps> = () => {
                 />
               </svg>
             </button>
-            
           </div>
-          
+
           <div className="dropdown dropdown-end hidden lg:flex">
             <div
               tabIndex={0}
@@ -301,7 +303,7 @@ const Header : React.FC<ResultsPageProps> = () => {
               </li>
             </ul>
           </div>
-          <Link href={"/cart"}>
+          <Link href={{ pathname: "/cart/" }}>
             <div className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
@@ -311,7 +313,7 @@ const Header : React.FC<ResultsPageProps> = () => {
                 <div className="indicator ">
                   <Image src={cart1} alt={""}></Image>
                   <span className="badge badge-sm indicator-item bg-black text-white">
-                   {cartCount}
+                  {cartCount}
                   </span>
                 </div>
               </div>
@@ -321,4 +323,5 @@ const Header : React.FC<ResultsPageProps> = () => {
       </div>
     </>
   );
-};export default Header;
+};
+export default Header;

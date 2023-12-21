@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState, useEffect  } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
 import headerimg from "../../../public/img/Image Placeholder header.png";
@@ -12,15 +12,17 @@ import "./shop.css";
 import Link from "next/link";
 import { shops } from "../shop/shop";
 import { useCart } from "../context/CartContext";
-import Product from '../product/page';
-
-
 
 const Shop: React.FC = () => {
+  const handleImageClick = (id: number) => {
+    // console.log(`Clicked on image with ID: ${id}`);
+    console.log(`${id}`);
+    // ตัวอย่าง: เปิดหน้าใหม่ที่มี URL เช่น `/shop/${id}`
+    // window.location.href = `/shop/product`;
+    window.location.href = `/product/${id}`;
+  };
+
   const { cart, addToCart } = useCart();
-  const [data, setData] = useState(null)
-  // console.log(data);
-  
   const handleAddToCart = (
     productName: string,
     productPrice: number,
@@ -29,27 +31,6 @@ const Shop: React.FC = () => {
     addToCart(productName, productPrice, productImage);
     // ตัวเลือก: คุณสามารถอัปเดตจำนวนรายการในส่วนหัวได้ที่นี่
   };
-
-  useEffect(() => {
-   
-    
-    const fetchData = async () => {
-      console.log("test");
-      axios({
-        method: 'get',
-        url: 'https://dummyjson.com/products?limit=100&skip=10',
-      })
-        .then(function (response) {
-          let result = []
-          result = response.data;
-          // console.log(result);
-          setData(result)
-        });
-    }
-  
-   fetchData()
-  }, [])
-  
   return (
     <>
       <div>
@@ -81,8 +62,7 @@ const Shop: React.FC = () => {
                 <div className="pr-35 pb-50 pt-10 float-left ml-5 lg:flex hidden mr-5">
                   <div>
                     <div className="flex">
-                      <Image src={vectorfilter} alt={""} />
-                      <p className="font-bold pr-5 pl-3">Filter</p>
+                      <p className="font-bold pr-5 text-lg">Filter</p>
                     </div>
                     <div className="font-bold pt-5 pb-5">
                       <p>CATEGORIES</p>
@@ -154,9 +134,11 @@ const Shop: React.FC = () => {
                 </div>
                 <div className="pt-10">
                   <div className=" pb-10 lg:flex hidden">
-                    <div className="pr-96 font-bold">Living Room</div>
-                    <div className="ml-48">
-                      <div className="dropdown">
+                    <div className="pr-910 font-bold text-base">
+                      Living Room
+                    </div>
+                    <div className="">
+                      <div className="dropdown ml-[600px] text-base">
                         <div tabIndex={0} className="flex font-bold pr-10 ">
                           Sort by
                           <svg
@@ -202,23 +184,16 @@ const Shop: React.FC = () => {
                   <div className="bg-white ">
                     <div className="mx-auto max-w-7xl ">
                       <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:max-w-none lg:grid-cols-3 lg:px-0 px-24">
-                        {data?.products.map((data, index) => (
-                          <Link
-                            key={data.id}
-                            href={{
-                              pathname: `/product/${data.id}`,
-                              // query: { slug: data.id },
-                            }}
-                          >
+                        {shops.map((data, index) => (
                           <div
+                            key={index}
                             className="flex max-w-xl flex-col items-start justify-between relative"
                           >
                             <div className="card flex items-center gap-x-4 text-xs">
                               <Image
-                                src={data.images[0]}
+                                src={data.img}
                                 alt={`Shop ${index + 1}`}
                                 width={500}
-                                height={200}
                               />
                               <div className="indicator absolute top-3 left-5 h-7 w-20">
                                 <p className="text-black bg-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm font-bold">
@@ -296,15 +271,14 @@ const Shop: React.FC = () => {
                               </div>
                             </div>
                             <div className="font-bold mt-2">
-                              {data.brand}
+                              {data.name}
                               <br />
                               <span>${data.price}</span>
                             </div>
                           </div>
-                          </Link>
                         ))}
                       </div>
-                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0">
+                      <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0 mb-10">
                         <button className="btn btn-outline rounded-full w-60">
                           Show more
                         </button>

@@ -16,6 +16,7 @@ import review4 from "../../../public/img/product/review4.png";
 import review5 from "../../../public/img/product/review5.png";
 
 const Product = () => {
+
   const [count, setCount] = useState(1);
 
   const handelIncrement = () => {
@@ -128,12 +129,12 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <div className="indicator absolute top-24 left-5 h-7 w-20 lg:ml-48 ml-20 ">
+          <div className="indicator absolute top-24 lg:left-[-0px] left-20 h-7 w-20 lg:ml-48 mt-16">
             <p className="text-black bg-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm font-bold ">
               NEW
             </p>
           </div>
-          <div className="indicator absolute top-32 left-5 h-7 w-20 pt-2 lg:ml-48 ml-20 ">
+          <div className="indicator absolute top-32 lg:left-[-0px] left-20 h-7 w-20 pt-2 lg:ml-48 mt-16">
             <p className="text-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm bg-emerald-400 font-bold">
               -50%
             </p>
@@ -315,6 +316,8 @@ const Product = () => {
           </div>
         </div>
       </div>
+      
+
       <div className="flex pt-10 lg:px-0 px-16">
         <a className="link link-hover pr-10">Additional Info</a>
         <a className="link link-hover pr-10">Questions</a>
@@ -556,7 +559,7 @@ const Product = () => {
         </div>
         <hr></hr>
       </div>
-      <div className="pt-10 flex justify-center items-center">
+      <div className="pt-10 flex justify-center items-center mb-10">
         <button className="btn btn-outline rounded-full w-60">Load more</button>
       </div>
     </div>
