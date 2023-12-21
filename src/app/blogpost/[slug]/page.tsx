@@ -18,15 +18,20 @@ function Blogpost({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios({
-        method: "get",
-        url: `https://dummyjson.com/products/${params.slug}`,
-      }).then(function (response) {
-        let result = [];
-        result = response.data;
-        // console.log(result);
-        setData(result);
-      });
+      try{
+        axios({
+          method: "get",
+          url: `https://dummyjson.com/products/${params.slug}`,
+        }).then(function (response) {
+          let result = [];
+          result = response.data;
+          // console.log(result);
+          setData(result);
+        });
+
+      }catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
@@ -70,7 +75,7 @@ function Blogpost({ params }: { params: { slug: string } }) {
         </div>
 
         <div className="lg:ml-40 lg:w-4/5 lg:p-0 lg:pt-0 lg:pb-0 p-12 pt-2 pb-1">
-        <Image src={blogpost?.images[0] ?? ''} alt={"shop"} width={500} height={200} />
+        <Image src={blogpost?.images[0] ?? ''} alt={"shop"} width={500} height={200}/>
 
           <p className="mt-10 text-base font-normal">
             {blogpost?.description}

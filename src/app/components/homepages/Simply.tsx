@@ -69,8 +69,7 @@ function Simply() {
                         className="m-auto"
                         src={living}
                         alt={""}
-                        width={550}
-                        height={2}
+                      
                       />
                       <h1 className="font-semibold text-2xl  absolute lg:top-10 lg:left-20 top-8 left-8 text-black">
                         Living Room
@@ -107,8 +106,7 @@ function Simply() {
                         className="m-auto"
                         src={bedrm}
                         alt={""}
-                        width={550}
-                        height={2}
+                     
                       />
                       <h1 className="font-semibold text-2xl absolute lg:top-48 lg:left-20 top-24 left-8 text-black">
                         Bedroom
@@ -145,8 +143,7 @@ function Simply() {
                         className="m-auto"
                         src={kitcn}
                         alt={""}
-                        width={550}
-                        height={2}
+                     
                       />
                       <h1 className="font-semibold text-2xl  absolute lg:top-48 lg:left-20 top-24 left-8 text-black">
                         Kitchen

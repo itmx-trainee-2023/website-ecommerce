@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 
 const Arrivals = (props: any) => {
-  console.log("props", props);
   return (
     <div className="md:ml-8 md:w-1/4 sm:m-auto  ">
       <div className=" w-40 m-3 lg:w-64 bg-neutral-100 lg:p-10 p-8">

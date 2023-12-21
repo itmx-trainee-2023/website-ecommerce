@@ -17,7 +17,7 @@ import Link from "next/link";
 
 function HomePage() {
   const [step, setStep] = useState(1);
-  console.log("delivery",delivery)
+  // console.log("delivery",delivery)
   return (
     <div>
       

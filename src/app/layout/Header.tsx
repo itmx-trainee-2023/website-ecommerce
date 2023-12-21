@@ -52,7 +52,7 @@ const Header: React.FC<ResultsPageProps> = () => {
     fetch("https://dummyjson.com/products/search?q=phone")
       .then((res) => res.json())
       .then((data) => {
-        console.log('Data received:', data);
+        // console.log('Data received:', data);
         setOriginalData(data.products);
         setFilteredData(data.products);
       });
@@ -63,7 +63,7 @@ const Header: React.FC<ResultsPageProps> = () => {
       result.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredData(filteredResults);
-    console.log('search:',filteredResults)
+    // console.log('search:',filteredResults)
   };
 
   const handleButtonClick = () => {
@@ -81,9 +81,6 @@ const Header: React.FC<ResultsPageProps> = () => {
     setSidebarVisible(false);
   };
 
-  fetch("https://dummyjson.com/products/search?q=phone")
-    .then((res) => res.json())
-    .then(console.log);
 
   return (
     <>
@@ -143,12 +140,6 @@ const Header: React.FC<ResultsPageProps> = () => {
                   <li>
                     <Link href={"/shop"} onClick={closeSidebar}>
                       Shop
-                    </Link>
-                  </li>
-                  <hr className="my-2 border-t border-gray-300" />
-                  <li>
-                    <Link href={"/product"} onClick={closeSidebar}>
-                      Product
                     </Link>
                   </li>
                   <hr className="my-2 border-t border-gray-300" />
@@ -219,9 +210,6 @@ const Header: React.FC<ResultsPageProps> = () => {
             </li>
             <li>
               <Link href={"/shop"}>Shop</Link>
-            </li>
-            <li>
-              <Link href={"/product"}>Product</Link>
             </li>
             <li>
               <a>Contact Us</a>

@@ -75,8 +75,6 @@ export default function Page({ params }: { params: { slug: string } }) {
     fetchData();
   }, []);
 
-
-
   return (
     <>
       <div className="mx-auto max-w-screen-xl">

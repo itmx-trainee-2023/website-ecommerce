@@ -15,7 +15,7 @@ interface ArticlesData {
 
 function Articles() {
   const [data, setData] = useState<{ products: ArticlesData[] } | null>(null);
-  console.log("Articles", data);
+  // console.log("Articles", data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,46 +45,34 @@ function Articles() {
               }}
             >
               <div className="flex max-w-xl flex-col items-start justify-between relative">
-                <div className="card flex items-center gap-x-4 text-xs shadow-2xl">
-                  <div
-                    className="image-container"
-                    style={{
-                      width: "350px",
-                      height: "350px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                      }}
-                    >
-                      <Image
-                        src={data.images[0]}
-                        alt={`Shop ${index + 1}`}
-                        width={300}
-                        height={300}
-                        layout="fixed"
-                        objectFit="cover"
-                      />
-                    </div>
-                  </div>
-                </div>
+              <div
+  style={{
+    boxShadow: "0px 5px 10px 5px rgba(0, 0, 0, 0.1)", 
+  }}
+>
+  <Image
+    src={data.images[0]}
+    alt={`Shop ${index + 1}`}
+    width={370}
+    height={370}
+    priority={true}
+  />
+</div>
 
-                <div className="font-bold mt-4 ">
-                  {data.brand}
-                  <br />
-                  <a
-                    href="#"
-                    className=" top-82 lg:top-96 lg:right-50  font-semibold text-black border-b border-black"
-                  >
-                    <span className=" inset-0" aria-hidden="true" />
-                    Read More<span aria-hidden="true">&rarr;</span>
-                  </a>
-                </div>
-              </div>
+
+  <div className="font-bold mt-4 ">
+    {data.brand}
+    <br />
+    <a
+      href="#"
+      className="top-82 lg:top-96 lg:right-50 font-semibold text-black border-b border-black"
+    >
+      <span className="inset-0" aria-hidden="true" />
+      Read More<span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</div>
+
             </Link>
           ))}
         </div>
