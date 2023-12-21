@@ -11,6 +11,7 @@ import Banner from "../components/homepages/Banner";
 import Simply from "../components/homepages/Simply";
 import Arrivals from "../components/homepages/Arrivals";
 import Articles from "../components/homepages/Articles";
+import Link from "next/link";
 
 
 
@@ -82,13 +83,14 @@ function HomePage() {
             <h1 className="justify-between font-semibold text-gray-900 text-4xl ml-8 mt-8">
               Articles
             </h1>
-            <a
-              href="#"
+            <Link href={"/blog1"}>
+            <p
+              
               className="absolute top-10 right-16 font-semibold text-black border-b border-black"
             >
               <span className="absolute inset-0" aria-hidden="true" />
               More Articles<span aria-hidden="true">&rarr;</span>
-            </a>
+            </p></Link>
           </div>
         </div>
         <Articles/>

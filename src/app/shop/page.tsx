@@ -30,9 +30,6 @@ const Shop: React.FC = () => {
   }
 
   const { cart, addToCart } = useCart();
-  const [data, setData] = useState(null);
-  // console.log(data);
-
   const handleAddToCart = (
     productName: string,
     productPrice: number,
@@ -47,7 +44,7 @@ const Shop: React.FC = () => {
       console.log("test");
       axios({
         method: "get",
-        url: "https://dummyjson.com/products?limit=10&skip=20",
+        url: "https://dummyjson.com/products?limit=10&skip=10",
       }).then(function (response) {
         let result = [];
         result = response.data;
@@ -211,115 +208,100 @@ const Shop: React.FC = () => {
                 <div>
                   <div className="bg-white ">
                     <div className="mx-auto max-w-7xl ">
-                      <div>
-                        <div>
-                          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:max-w-none lg:grid-cols-3 lg:px-0 px-24">
-                            {data?.products.map((data, index) => (
-                              <>
-                                <Link
-                                  key={data.id}
-                                  href={{
-                                    pathname: `/product/${data.id}`,
-                                    // query: { slug: data.id },
-                                  }}
-                                >
-                                  <div
-                                    className="bg-white border-2 mr-60"
-                                    style={{
-                                      width: "300px",
-                                      height: "400px",
-                                      boxShadow:
-                                        "0px 5px 10px 6px rgba(0, 0, 0, 0.1)", // เพิ่ม box-shadow
-                                      borderRadius: "5px", // เพิ่มขอบมน
-                                      overflow: "hidden", // ตัดรูปภาพเมื่อมีการปรับขนาด
-                                    }}
-                                  >
-                                    <div
-                                      className="flex max-w-xl flex-col items-start justify-between relative mr-56 "
-                                      style={{
-                                        width: "300px",
-                                        height: "300px",
-                                        marginBottom: "10px",
-                                      }}
+                      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:max-w-none lg:grid-cols-3 lg:px-0 px-24">
+                        {shops.map((data, index) => (
+                          <div
+                            key={index}
+                            className="flex max-w-xl flex-col items-start justify-between relative"
+                          >
+                            <div className="card flex items-center gap-x-4 text-xs">
+                              <Image
+                                src={data.img}
+                                alt={`Shop ${index + 1}`}
+                                width={500}
+                              />
+                              <div className="indicator absolute top-3 left-5 h-7 w-20">
+                                <p className="text-black bg-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm font-bold">
+                                  NEW
+                                </p>
+                                <div className="indicator absolute top-8 h-7 w-20 pt-2">
+                                  <p className="text-white p-2 rounded-md w-16 h-7 flex items-center justify-center text-sm bg-emerald-400 font-bold">
+                                    -50%
+                                  </p>
+                                  <div className="card-body">
+                                    <button
+                                      className="flex-none flex items-center justify-center w-10 h-10 rounded-full text-white border border-slate-200 bg-white ml-44 mt-72"
+                                      type="button"
+                                      aria-label="Like"
                                     >
-                                      <div
-                                        className="relative"
-                                        style={{
-                                          width: "100%",
-                                          height: "100%",
-                                        }}
+                                      <svg
+                                        className="stroke-gray-500 text-white"
+                                        width="20"
+                                        height="20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                        strokeWidth="2"
                                       >
-                                        <Image
-                                          src={data.images[0]}
-                                          alt={`Shop ${index + 1}`}
-                                          width={400}
-                                          height={100}
-                                          className="w-full h-full object-cover"
-                                          style={{
-                                            objectFit: "cover",
-                                            objectPosition: "center",
-                                            aspectRatio: "1 / 1",
-                                          }}
+                                        <path
+                                          fillRule="evenodd"
+                                          clipRule="evenodd"
+                                          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                                         />
-                                      </div>
-                                      <div className="indicator absolute top-3 left-5 h-7 w-2">
-                                        <p className="text-black bg-white p-3 rounded-md w-15 h-7 flex items-center justify-center text-sm font-bold">
-                                          NEW
-                                        </p>
-                                        <div className="indicator absolute top-8 h-7 w-20 pt-2">
-                                          <p className="text-white p-3 rounded-md w-15 h-7 flex items-center justify-center text-sm bg-emerald-400 font-bold">
-                                            -50%
-                                          </p>
-                                        </div>
-                                        <div className="card-body">
-                                          <button
-                                            className="flex-none flex items-center justify-center w-10 h-10 rounded-full text-white border border-slate-200 bg-white ml-44 mt-72"
-                                            type="button"
-                                            aria-label="Like"
-                                          >
-                                            <svg
-                                              className="stroke-gray-500 text-white"
-                                              width="20"
-                                              height="20"
-                                              fill="currentColor"
-                                              aria-hidden="true"
-                                              strokeWidth="2"
-                                            >
-                                              <path
-                                                fillRule="evenodd"
-                                                clipRule="evenodd"
-                                                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                                              />
-                                            </svg>
-                                          </button>
-                                          <div className="">
-                                            <button
-                                              className="card-btn"
-                                              onClick={() =>
-                                                handleAddToCart(
-                                                  data.name,
-                                                  data.price,
-                                                  data.img.src
-                                                )
-                                              }
-                                            >
-                                              Add to Cart
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="font-bold ml-5">
-                                      {data.title}
-                                      <br />
-                                      <span>${data.price}</span>
-                                    </div>
+                                      </svg>
+                                    </button>
+                                    <button
+                                      className="card-btn mt-64"
+                                      // onClick={() =>
+                                      //   handleAddToCart(
+                                      //     data.name,
+                                      //     data.price,
+                                      //     data.img.src
+                                      //   )
+                                      // }
+                                    >
+                                      Add to Cart
+                                    </button>
                                   </div>
-                                </Link>
-                              </>
-                            ))}
+                                </div>
+                              </div>
+                            </div>
+                            <div className=" justify-items-start mt-5 ">
+                              <div className="rating rating-sm ">
+                                <input
+                                  type="radio"
+                                  name="rating-9"
+                                  className="mask mask-star"
+                                />
+                                <input
+                                  type="radio"
+                                  name="rating-9"
+                                  className="mask mask-star"
+                                />
+                                <input
+                                  type="radio"
+                                  name="rating-9"
+                                  className="mask mask-star"
+                                />
+                                <input
+                                  type="radio"
+                                  name="rating-9"
+                                  className="mask mask-star"
+                                />
+                                <input
+                                  type="radio"
+                                  name="rating-9"
+                                  className="mask mask-star"
+                                  checked
+                                />
+                              </div>
+                            </div>
+                            <div className="font-bold mt-2">
+                              {data.name}
+                              <br />
+                              <span>${data.price}</span>
+                            </div>
                           </div>
-                        </div>
+                        ))}
                       </div>
                       <div className="pt-10 flex justify-center items-center lg:ml-80 ml-0 mb-10">
                         <button className="btn btn-outline rounded-full w-60">
@@ -338,3 +320,7 @@ const Shop: React.FC = () => {
   );
 };
 export default Shop;
+function setData(result: any) {
+  throw new Error("Function not implemented.");
+}
+
