@@ -42,7 +42,7 @@ function CART() {
 
       const updatedData = prevData.map((product) => {
         if (product.id === productId) {
-          return { ...product, quantity: product.quantity + 1 };
+          return { ...product, quantity: (product.quantity ?? 0) + 1 };
         }
         return product;
       });
@@ -52,13 +52,21 @@ function CART() {
   };
 
   const decreaseQuantity = (productId: number) => {
-    const updatedData = (data ?? []).map((product) => {
-      if (product.id === productId && product.quantity > 1) {
-        return { ...product, quantity: product.quantity - 1 };
+    setData((prevData) => {
+      if (!prevData) {
+        // จัดการกรณีที่ data เป็น null
+        return null;
       }
-      return product;
+
+      const updatedData = prevData.map((product) => {
+        if (product.id === productId && product.quantity > 1) {
+          return { ...product, quantity: (product.quantity ?? 2) - 1 };
+        }
+        return product;
+      });
+
+      return updatedData;
     });
-    setData(updatedData);
   };
 
   const removeProduct = (productId: number) => {
@@ -74,7 +82,7 @@ function CART() {
         const response = await axios.get("https://dummyjson.com/carts/1");
         const result = response.data;
 
-        console.log("result", result);
+        // console.log("result", result);
 
         // Assume 'products' is the array you want to use in your component
         const data = Array.isArray(result.products) ? result.products : [];
@@ -90,6 +98,20 @@ function CART() {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  const calculateTotalPrice = () => {
+    // ตรวจสอบว่า data ไม่เป็น null
+    if (!data) {
+      return 0;
+    }
+
+    // คำนวณราคาทั้งหมด
+    const totalPrice = data.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+    }, 0);
+
+    return totalPrice.toFixed(2); // ให้แสดงเป็นทศนิยม 2 ตำแหน่ง
+  };
 
   return (
     <div className="text-center mx-auto  items-center justify-center">
@@ -296,7 +318,7 @@ function CART() {
                           >
                             <MinusIcon className="h-3 w-3 mt-1 text-gray-700" />
                           </button>
-                          <span className=" px-1">{quantity}</span>
+                          <span className=" px-1">{item.quantity}</span>
                           <button
                             onClick={() => increaseQuantity(item.id)}
                             className=" px-1  md:rounded-r md:w-1/2"
@@ -310,9 +332,12 @@ function CART() {
                   <div className="w-full px-1 py-1 text-center md:rounded-lg  lg:px-1 lg:py-2 lg:text-center lg:rounded-lg  lg:ml-10 ">
                     <div className=" flex flex-col  lg:ml-2  lg:flex-col lg:mt-2 mr-28 lg:hidden ">
                       <span className=" text-sm text-left ml-4">
-                        ${item.price}
+                        ${item.price * item.quantity}
                       </span>
-                      <button className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14">
+                      <button
+                        className="btn btn-sm btn-ghost lg:btn lg:btn-sm lg:btn-ghost w-14"
+                        onClick={() => removeProduct(item.id)}
+                      >
                         X
                       </button>
                     </div>
@@ -323,7 +348,7 @@ function CART() {
                       >
                         <MinusIcon className="h-3 w-3 text-gray-700" />
                       </button>
-                      <span className=" px-1 py-2">{quantity}</span>
+                      <span className=" px-1 py-2">{item.quantity}</span>
                       <button
                         onClick={() => increaseQuantity(item.id)}
                         className=" px-1 py-2 md:rounded-r md:w-1/2"
@@ -336,7 +361,7 @@ function CART() {
                     ${item.price}
                   </div>
                   <div className="w-full px-4 py-2 text-center lg:flex hidden ">
-                    ${item.price}
+                    ${item.price * item.quantity}
                   </div>
                 </div>
               ))}
@@ -418,7 +443,9 @@ function CART() {
               </div>
               <div className="border-b-2 border-Slate-200 flex justify-between py-2">
                 <span className="text-left font-bold">Total</span>
-                <span className="text-right font-bold">$1345.00</span>
+                <span className="text-right font-bold">
+                  ${calculateTotalPrice()}
+                </span>
               </div>
               <button
                 className="btn mt-4 w-full btn-neutral "

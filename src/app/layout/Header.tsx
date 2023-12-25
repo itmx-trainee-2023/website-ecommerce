@@ -81,7 +81,6 @@ const Header: React.FC<ResultsPageProps> = () => {
     setSidebarVisible(false);
   };
 
-
   return (
     <>
       <div className=" navbar bg-base-100 shadow flex">
@@ -110,7 +109,9 @@ const Header: React.FC<ResultsPageProps> = () => {
 
                 <ul className="menu p-4 w-11/12 min-h-full bg-white text-base-content">
                   <div className="flex justify-between items-center p-2">
-                    <Link href={"/homepage"}><h1 className="text-lg font-semibold">3legant.</h1></Link>
+                    <Link href={"/homepage"}>
+                      <h1 className="text-lg font-semibold">3legant.</h1>
+                    </Link>
                     <button>
                       <Image
                         src={close}
@@ -199,11 +200,14 @@ const Header: React.FC<ResultsPageProps> = () => {
               </div>
             </div>
           </div>
-          <a href="#" className=" font-semibold text-xl ml-0 lg:float-left lg:ml-36 sm:ml-32 ">
+          <a
+            href="#"
+            className=" font-semibold text-xl ml-0 lg:float-left lg:ml-36 sm:ml-32 "
+          >
             3legant.
           </a>
         </div>
-        <div className="navbar-center hidden lg:flex  ml-80">
+        <div className="navbar-center hidden lg:flex  ml-96">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link href={"/homepage"}>Home</Link>
@@ -301,7 +305,7 @@ const Header: React.FC<ResultsPageProps> = () => {
                 <div className="indicator ">
                   <Image src={cart1} alt={""}></Image>
                   <span className="badge badge-sm indicator-item bg-black text-white">
-                  {cartCount}
+                    {cartCount}
                   </span>
                 </div>
               </div>
