@@ -459,7 +459,7 @@ function CART() {
         </>
       )}
 
-      {/* {step === 2 && (
+      {step === 2 && (
         <>
           <div className="flex flex-col lg:flex-row lg:w-[1120px] mx-auto py-20 justify-start items-start gap-16 w-full">
             <div className="flex-col  justify-start items-start gap-6 inline-flex w-full">
@@ -706,112 +706,50 @@ function CART() {
                 </button>
               </div>
             </div>
+
             <div className="w-full flex px-6 py-4 bg-white rounded-md  flex-col justify-end items-start gap-4 ">
               <div className="border p-4 rounded-lg w-full">
                 <div>
                   <span className="font-bold text-lg">Order summary</span>
-                </div>
-                <div className="flex items-center  mb-4 ">
-                  <Image
-                    src={img1}
-                    alt={"Not Found Image"}
-                    width={80}
-                    height={50}
-                  />
-                  <div className="ml-2 flex flex-col mt-2">
-                    <span>Try Table</span>
-                    <span className="">color: Black</span>
-                    <div className="border p-2 rounded-lg h-9 w-22 ">
+                </div>{" "}
+                {data?.map((item, index) => (
+                  <div className="flex items-center  mb-4 " key={index}>
+                    <Image
+                      src={item.thumbnail}
+                      alt={"Not Found Image"}
+                      width={80}
+                      height={50}
+                    />
+                    <div className="ml-2 flex flex-col mt-2">
+                      <span>Try Table</span>
+                      <span className="">color: Black</span>
+                      <div className="border p-2 rounded-lg h-9 w-22 ">
+                        <button
+                          onClick={() => decreaseQuantity(item.id)}
+                          className=" px-1 py-1 rounded-l"
+                        >
+                          <MinusIcon className="h-3 w-3 text-gray-700" />
+                        </button>
+                        <span className=" px-1 py-1">{item.quantity}</span>
+                        <button
+                          onClick={() => increaseQuantity(item.id)}
+                          className=" px-1 py-1 rounded-r"
+                        >
+                          <PlusIcon className="h-3 w-3 text-gray-700" />
+                        </button>
+                      </div>
                       <button
-                        onClick={decreaseQuantity}
-                        className=" px-1 py-1 rounded-l"
+                        className="btn btn-sm btn-ghost w-full"
+                        onClick={() => removeProduct(item.id)}
                       >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className=" px-1 py-1">{quantity}</span>
-                      <button
-                        onClick={increaseQuantity}
-                        className=" px-1 py-1 rounded-r"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                    </div>
-                    <button className="btn btn-sm btn-ghost w-full">
-                      X Remove
-                    </button>
-                  </div>
-                  <div className="ml-auto mb-12 font-bold">
-                    <span>$38.00</span>
-                  </div>
-                </div>
-                <div className="border-b-2 border-Slate-200 mt-3"></div>
-                <div className="flex items-center mb-4 mt-3">
-                  <Image
-                    src={img2}
-                    alt={"Not Found Image"}
-                    width={80}
-                    height={50}
-                  />
-                  <div className="ml-2 flex flex-col mt-2">
-                    <span>Try Table</span>
-                    <span className="">color: Black</span>
-                    <div className="border p-2 rounded-lg h-9 w-22">
-                      <button
-                        onClick={decreaseQuantity1}
-                        className=" px-1 py-1 rounded-l"
-                      >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className=" px-1 py-1">{quantity1}</span>
-                      <button
-                        onClick={increaseQuantity1}
-                        className=" px-1 py-1 rounded-r"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
+                        X Remove
                       </button>
                     </div>
-                    <button className="btn btn-sm btn-ghost w-full">
-                      X Remove
-                    </button>
-                  </div>
-                  <div className="ml-auto mb-12 font-bold">
-                    <span>$38.00</span>
-                  </div>
-                </div>
-                <div className="border-b-2 border-Slate-200 mt-3"></div>
-                <div className="flex items-center mt-3 ">
-                  <Image
-                    src={img3}
-                    alt={"Not Found Image"}
-                    width={80}
-                    height={50}
-                  />
-                  <div className="ml-2 flex flex-col mt-2">
-                    <span>Try Table</span>
-                    <span className="">color: Black</span>
-                    <div className="border p-2 rounded-lg h-9 w-22">
-                      <button
-                        onClick={decreaseQuantity2}
-                        className=" px-1 py-1 rounded-l"
-                      >
-                        <MinusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
-                      <span className=" px-1 py-1">{quantity2}</span>
-                      <button
-                        onClick={increaseQuantity2}
-                        className=" px-1 py-1 rounded-r"
-                      >
-                        <PlusIcon className="h-3 w-3 text-gray-700" />
-                      </button>
+                    <div className="ml-auto mb-12 font-bold">
+                      <span>${item.price}</span>
                     </div>
-                    <button className="btn btn-sm btn-ghost w-full">
-                      X Remove
-                    </button>
                   </div>
-                  <div className="ml-auto mb-12 font-bold">
-                    <span>$38.00</span>
-                  </div>
-                </div>
+                ))}
                 <div className="border-b-2 border-Slate-200 mt-3"></div>
                 <div className="flex items-center mt-6 w-full">
                   <input
@@ -845,16 +783,19 @@ function CART() {
                     <div className="border-b-2 border-Slate-200 mt-3"></div>
                     <div className=" flex items-center mt-3">
                       <span>Subtotal</span>
-                      <span className=" ml-auto">$99.00</span>
+                      <span className=" ml-auto">${calculateTotalPrice()}</span>
                     </div>
                     <div className="border-b-2 border-Slate-200 mt-3"></div>
                     <div className=" flex items-center mt-3">
                       <span className="font-bold">Total</span>
-                      <span className=" ml-auto font-bold">$234.00</span>
+                      <span className=" ml-auto font-bold">
+                        ${calculateTotalPrice()}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className=" lg:hidden flex  w-full px-10 py-3 btn btn-neutral  rounded-lg justify-center items-center gap-2 ">
                 <button
                   className="text-center w-full text-white text-base font-medium  leading-7"
@@ -866,7 +807,7 @@ function CART() {
             </div>
           </div>
         </>
-      )} */}
+      )}
       <div className="flex flex-col items-center justify-center min-h-screen mt-10">
         {step === 3 && (
           <>
@@ -879,53 +820,28 @@ function CART() {
                   Your order has been received
                 </div>
               </div>
+
               <div className="w-full justify-center items-start gap-10 inline-flex">
-                <div className="w-24 h-28 relative">
-                  <div className="w-20 h-24 left-0 top-[16px] absolute flex-col justify-center items-center inline-flex">
-                    <Image
-                      src={img1}
-                      alt={"Not Found Image"}
-                      width={80}
-                      height={50}
-                    />
-                  </div>
-                  <div className="w-8 px-[11px] py-1 left-[64px] top-0 absolute bg-neutral-900 rounded-[80px] justify-center items-center inline-flex">
-                    <div className="text-center text-white text-base font-semibold font-['Inter'] leading-normal">
-                      2
+                {" "}
+                {data?.map((item, index) => (
+                  <div className="w-24 h-28 relative" key={index}>
+                    <div className="w-20 h-24 left-0 top-[16px] absolute flex-col justify-center items-center inline-flex">
+                      <Image
+                        src={item.thumbnail}
+                        alt={"Not Found Image"}
+                        width={80}
+                        height={50}
+                      />
+                    </div>
+                    <div className="w-8 px-[11px] py-1 left-[64px] top-0 absolute bg-neutral-900 rounded-[80px] justify-center items-center inline-flex">
+                      <div className="text-center text-white text-base font-semibold font-['Inter'] leading-normal">
+                        {item.quantity}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="w-24 h-28 relative">
-                  <div className="w-20 h-24 left-0 top-[16px] absolute flex-col justify-center items-center inline-flex">
-                    <Image
-                      src={img2}
-                      alt={"Not Found Image"}
-                      width={80}
-                      height={50}
-                    />
-                  </div>
-                  <div className="w-8 px-[11px] py-1 left-[64px] top-0 absolute bg-neutral-900 rounded-[80px] justify-center items-center inline-flex">
-                    <div className="text-center text-white text-base font-semibold font-['Inter'] leading-normal">
-                      2
-                    </div>
-                  </div>
-                </div>
-                <div className="w-24 h-28 relative">
-                  <div className="w-20 h-24 left-0 top-[16px] absolute flex-col justify-center items-center inline-flex">
-                    <Image
-                      src={img3}
-                      alt={"Not Found Image"}
-                      width={80}
-                      height={50}
-                    />
-                  </div>
-                  <div className="w-8 py-1 left-[64px] top-0 absolute bg-neutral-900 rounded-[80px] justify-center items-center inline-flex">
-                    <div className="text-center text-white text-base font-semibold font-['Inter'] leading-normal">
-                      1
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
+
               <div className="w-[548px] justify-center items-center gap-8 inline-flex">
                 <div className="flex-col justify-start items-start gap-5 inline-flex">
                   <div className="justify-center items-center gap-3 inline-flex">
